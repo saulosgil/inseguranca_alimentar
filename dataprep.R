@@ -128,8 +128,9 @@ c_p
 
 # Empilha as linhas para ter um vetor de 319 linhas e, assim, poder juntar no df original
 peso <- bind_rows(p, c_p)
+peso
 
-# Muda o vetor original de data de nascimento para o vetor ajustado do tipo Date
+# Muda o vetor original de peso para o vetor ajustado do tipo Double
 # df <-
 df_ajustado <-
   df_ajustado |>
@@ -161,8 +162,9 @@ c_e
 
 # Empilha as linhas para ter um vetor de 319 linhas e, assim, poder juntar no df original
 estatura <- bind_rows(e, c_e)
+estatura
 
-# Muda o vetor original de data de nascimento para o vetor ajustado do tipo Date
+# Muda o vetor original de estatura para o vetor ajustado do tipo Double
 # df <-
 df_ajustado <-
   df_ajustado |>
@@ -176,8 +178,96 @@ df_ajustado <-
     estatura = as.double(estatura)
   )
 
-# Circunferencia de cintura e quadril
+# Circunferencia de cintura
+# tira da lista e cria um vetor com as circunferencias da cintura em cm (porém as linhas erradas foram excluidas)
+cc <- unlist(df$circunferencia_cintura_colocar_todas_as_medidas_separado_por_barra_ex_84_83_84_separador,
+            use.names = TRUE)
 
+# converte em tibble
+cc <- as_tibble(cc)
+cc
+
+# cria um vetor de NA para incluir nas linhas erradas
+c_cc <- c("NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA")
+
+# converte em tibble
+c_cc <- as_tibble(c_cc)
+c_cc
+
+# Empilha as linhas para ter um vetor de 319 linhas e, assim, poder juntar no df original
+circ_cintura <- bind_rows(cc, c_cc)
+circ_cintura
+
+# Muda o vetor original da circunf. da cintura para o vetor ajustado do tipo String
+# df <-
+df_ajustado <-
+  df_ajustado |>
+  mutate(
+    circunferencia_cintura_colocar_todas_as_medidas_separado_por_barra_ex_84_83_84_separador = circ_cintura$value
+  ) |>
+  rename(
+    circ_cintura = circunferencia_cintura_colocar_todas_as_medidas_separado_por_barra_ex_84_83_84_separador
+  )
+
+# Circunferencia do quadril
+# tira da lista e cria um vetor com as circunferencias da cintura em cm (porém as linhas erradas foram excluidas)
+q <- unlist(df$circunferencia_quadril_colocar_todas_as_medidas_separado_por_barra_ex_84_83_84_separador,
+            use.names = TRUE)
+
+# converte em tibble
+q <- as_tibble(q)
+q
+
+# cria um vetor de NA para incluir nas linhas erradas
+c_q <- c("NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA")
+
+# converte em tibble
+c_q <- as_tibble(c_q)
+c_q
+
+# Empilha as linhas para ter um vetor de 319 linhas e, assim, poder juntar no df original
+circ_quadril <- bind_rows(q, c_q)
+circ_quadril
+
+# Muda o vetor original da circunf. da cintura para o vetor ajustado do tipo String
+df_ajustado <-
+  df_ajustado |>
+  mutate(
+    circunferencia_quadril_colocar_todas_as_medidas_separado_por_barra_ex_84_83_84_separador = circ_quadril$value
+  ) |>
+  rename(
+    circ_quadril = circunferencia_quadril_colocar_todas_as_medidas_separado_por_barra_ex_84_83_84_separador
+  )
+
+# inventario_de_ansiedade_de_beck_demencia_ou_formigamento
+# tira da lista e cria um vetor(porém as linhas erradas foram excluidas)
+ans1 <- unlist(df$inventario_de_ansiedade_de_beck_demencia_ou_formigamento,
+               use.names = TRUE)
+
+# converte em tibble
+ans1 <- as_tibble(ans1)
+ans1
+
+# cria um vetor de NA para incluir nas linhas erradas
+c_ans1 <- c("NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA")
+
+# converte em tibble
+c_ans1 <- as_tibble(c_ans1)
+c_ans1
+
+# Empilha as linhas para ter um vetor de 319 linhas e, assim, poder juntar no df original
+v_ans1 <- bind_rows(ans1, c_ans1)
+v_ans1
+
+# Muda o vetor original da circunf. da cintura para o vetor ajustado do tipo String
+df_ajustado <-
+  df_ajustado |>
+  mutate(
+    inventario_de_ansiedade_de_beck_demencia_ou_formigamento = v_ans1$value
+  ) |>
+  mutate(
+    inventario_de_ansiedade_de_beck_demencia_ou_formigamento = as.integer(inventario_de_ansiedade_de_beck_demencia_ou_formigamento)
+  )
 
 df_ajustado |>
   select(where(is.list)) |>
