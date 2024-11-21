@@ -259,7 +259,7 @@ c_ans1
 v_ans1 <- bind_rows(ans1, c_ans1)
 v_ans1
 
-# Muda o vetor original da circunf. da cintura para o vetor ajustado do tipo String
+# Muda o vetor original da inventario_de_ansiedade_de_beck_demencia_ou_formigamento para o vetor ajustado do tipo String
 df_ajustado <-
   df_ajustado |>
   mutate(
@@ -269,30 +269,391 @@ df_ajustado <-
     inventario_de_ansiedade_de_beck_demencia_ou_formigamento = as.integer(inventario_de_ansiedade_de_beck_demencia_ou_formigamento)
   )
 
+# inventario_de_ansiedade_de_beck_sensacao_de_calor
+# tira da lista e cria um vetor(porém as linhas erradas foram excluidas)
+ans2 <- unlist(df$inventario_de_ansiedade_de_beck_sensacao_de_calor,
+               use.names = TRUE)
+
+# converte em tibble
+ans2 <- as_tibble(ans2)
+ans2 <-
+  ans2 |>
+  mutate(value = as.character(value))
+
+# cria um vetor de NA para incluir nas linhas erradas
+c_ans2 <- c("NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA")
+
+# converte em tibble
+c_ans2 <- as_tibble(c_ans2)
+c_ans2
+
+# Empilha as linhas para ter um vetor de 319 linhas e, assim, poder juntar no df original
+v_ans2 <- bind_rows(ans2, c_ans2)
+v_ans2
+
+# Muda o vetor original da inventario_de_ansiedade_de_beck_sensacao_de_calor para o vetor ajustado do tipo String
+df_ajustado <-
+  df_ajustado |>
+  mutate(
+    inventario_de_ansiedade_de_beck_sensacao_de_calor = v_ans2$value
+  ) |>
+  mutate(
+    inventario_de_ansiedade_de_beck_sensacao_de_calor = as.integer(inventario_de_ansiedade_de_beck_sensacao_de_calor)
+  )
+
+# inventario_de_ansiedade_de_beck_tremores_nas_pernas
+# tira da lista e cria um vetor(porém as linhas erradas foram excluidas)
+ans3 <- unlist(df$inventario_de_ansiedade_de_beck_tremores_nas_pernas,
+               use.names = TRUE)
+
+# converte em tibble
+ans3 <- as_tibble(ans3)
+ans3 <-
+  ans3 |>
+  mutate(value = as.character(value))
+
+# cria um vetor de NA para incluir nas linhas erradas
+c_ans3 <- c("NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA")
+
+# converte em tibble
+c_ans3 <- as_tibble(c_ans3)
+c_ans3
+
+# Empilha as linhas para ter um vetor de 319 linhas e, assim, poder juntar no df original
+v_ans3 <- bind_rows(ans3, c_ans3)
+v_ans3
+
+# Muda o vetor original da inventario_de_ansiedade_de_beck_tremores_nas_pernas para o vetor ajustado do tipo String
+df_ajustado <-
+  df_ajustado |>
+  mutate(
+    inventario_de_ansiedade_de_beck_tremores_nas_pernas = v_ans3$value
+  ) |>
+  mutate(
+    inventario_de_ansiedade_de_beck_tremores_nas_pernas = as.integer(inventario_de_ansiedade_de_beck_tremores_nas_pernas)
+  )
+
+# inventario_de_ansiedade_de_beck_incapaz_de_relaxar
+# tira da lista e cria um vetor(porém as linhas erradas foram excluidas)
+ans4 <- unlist(df$inventario_de_ansiedade_de_beck_incapaz_de_relaxar,
+               use.names = TRUE)
+
+# converte em tibble
+ans4 <- as_tibble(ans4)
+ans4 <-
+  ans4 |>
+  mutate(value = as.character(value))
+
+# cria um vetor de NA para incluir nas linhas erradas
+c_ans4 <- c("NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA")
+
+# converte em tibble
+c_ans4 <- as_tibble(c_ans4)
+c_ans4
+
+# Empilha as linhas para ter um vetor de 419 linhas e, assim, poder juntar no df original
+v_ans4 <- bind_rows(ans4, c_ans4)
+v_ans4
+
+# Muda o vetor original da inventario_de_ansiedade_de_beck_incapaz_de_relaxar para o vetor ajustado do tipo String
+df_ajustado <-
+  df_ajustado |>
+  mutate(
+    inventario_de_ansiedade_de_beck_incapaz_de_relaxar = v_ans4$value
+  ) |>
+  mutate(
+    inventario_de_ansiedade_de_beck_incapaz_de_relaxar = as.integer(inventario_de_ansiedade_de_beck_incapaz_de_relaxar)
+  )
+
+# inventario_de_ansiedade_de_beck_medo_que_aconteca_o_pior
+# tira da lista e cria um vetor(porém as linhas erradas foram excluidas)
+ans5 <- unlist(df$inventario_de_ansiedade_de_beck_medo_que_aconteca_o_pior,
+               use.names = TRUE)
+
+# converte em tibble
+ans5 <- as_tibble(ans5)
+ans5 <-
+  ans5 |>
+  mutate(value = as.character(value))
+
+# cria um vetor de NA para incluir nas linhas erradas
+c_ans5 <- c("NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA")
+
+# converte em tibble
+c_ans5 <- as_tibble(c_ans5)
+c_ans5
+
+# Empilha as linhas para ter um vetor de 519 linhas e, assim, poder juntar no df original
+v_ans5 <- bind_rows(ans5, c_ans5)
+v_ans5
+
+# Muda o vetor original da inventario_de_ansiedade_de_beck_medo_que_aconteca_o_pior para o vetor ajustado do tipo String
+df_ajustado <-
+  df_ajustado |>
+  mutate(
+    inventario_de_ansiedade_de_beck_medo_que_aconteca_o_pior = v_ans5$value
+  ) |>
+  mutate(
+    inventario_de_ansiedade_de_beck_medo_que_aconteca_o_pior = as.integer(inventario_de_ansiedade_de_beck_medo_que_aconteca_o_pior)
+  )
+
+# inventario_de_ansiedade_de_beck_sem_equilibrio
+# tira da lista e cria um vetor(porém as linhas erradas foram excluidas)
+ans6 <- unlist(df$inventario_de_ansiedade_de_beck_sem_equilibrio,
+               use.names = TRUE)
+
+# converte em tibble
+ans6 <- as_tibble(ans6)
+ans6 <-
+  ans6 |>
+  mutate(value = as.character(value))
+
+# cria um vetor de NA para incluir nas linhas erradas
+c_ans6 <- c("NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA")
+
+# converte em tibble
+c_ans6 <- as_tibble(c_ans6)
+c_ans6
+
+# Empilha as linhas para ter um vetor de 619 linhas e, assim, poder juntar no df original
+v_ans6 <- bind_rows(ans6, c_ans6)
+v_ans6
+
+# Muda o vetor original da inventario_de_ansiedade_de_beck_sem_equilibrio para o vetor ajustado do tipo String
+df_ajustado <-
+  df_ajustado |>
+  mutate(
+    inventario_de_ansiedade_de_beck_sem_equilibrio = v_ans6$value
+  ) |>
+  mutate(
+    inventario_de_ansiedade_de_beck_sem_equilibrio = as.integer(inventario_de_ansiedade_de_beck_sem_equilibrio)
+  )
+
+# inventario_de_ansiedade_de_beck_nervoso
+# tira da lista e cria um vetor(porém as linhas erradas foram excluidas)
+ans7 <- unlist(df$inventario_de_ansiedade_de_beck_nervoso,
+               use.names = TRUE)
+
+# converte em tibble
+ans7 <- as_tibble(ans7)
+ans7 <-
+  ans7 |>
+  mutate(value = as.character(value))
+
+# cria um vetor de NA para incluir nas linhas erradas
+c_ans7 <- c("NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA")
+
+# converte em tibble
+c_ans7 <- as_tibble(c_ans7)
+c_ans7
+
+# Empilha as linhas para ter um vetor de 719 linhas e, assim, poder juntar no df original
+v_ans7 <- bind_rows(ans7, c_ans7)
+v_ans7
+
+# Muda o vetor original da inventario_de_ansiedade_de_beck_nervoso para o vetor ajustado do tipo String
+df_ajustado <-
+  df_ajustado |>
+  mutate(
+    inventario_de_ansiedade_de_beck_nervoso = v_ans7$value
+  ) |>
+  mutate(
+    inventario_de_ansiedade_de_beck_nervoso = as.integer(inventario_de_ansiedade_de_beck_nervoso)
+  )
+
+# inventario_de_ansiedade_de_beck_sensacao_de_sufocacao
+# tira da lista e cria um vetor(porém as linhas erradas foram excluidas)
+ans8 <- unlist(df$inventario_de_ansiedade_de_beck_sensacao_de_sufocacao,
+               use.names = TRUE)
+
+# converte em tibble
+ans8 <- as_tibble(ans8)
+ans8 <-
+  ans8 |>
+  mutate(value = as.character(value))
+
+# cria um vetor de NA para incluir nas linhas erradas
+c_ans8 <- c("NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA")
+
+# converte em tibble
+c_ans8 <- as_tibble(c_ans8)
+c_ans8
+
+# Empilha as linhas para ter um vetor de 819 linhas e, assim, poder juntar no df original
+v_ans8 <- bind_rows(ans8, c_ans8)
+v_ans8
+
+# Muda o vetor original da inventario_de_ansiedade_de_beck_sensacao_de_sufocacao para o vetor ajustado do tipo String
+df_ajustado <-
+  df_ajustado |>
+  mutate(
+    inventario_de_ansiedade_de_beck_sensacao_de_sufocacao = v_ans8$value
+  ) |>
+  mutate(
+    inventario_de_ansiedade_de_beck_sensacao_de_sufocacao = as.integer(inventario_de_ansiedade_de_beck_sensacao_de_sufocacao)
+  )
+
+# inventario_de_ansiedade_de_beck_tremores_nas_maos
+# tira da lista e cria um vetor(porém as linhas erradas foram excluidas)
+ans9 <- unlist(df$inventario_de_ansiedade_de_beck_tremores_nas_maos,
+               use.names = TRUE)
+
+# converte em tibble
+ans9 <- as_tibble(ans9)
+ans9 <-
+  ans9 |>
+  mutate(value = as.character(value))
+
+# cria um vetor de NA para incluir nas linhas erradas
+c_ans9 <- c("NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA")
+
+# converte em tibble
+c_ans9 <- as_tibble(c_ans9)
+c_ans9
+
+# Empilha as linhas para ter um vetor de 919 linhas e, assim, poder juntar no df original
+v_ans9 <- bind_rows(ans9, c_ans9)
+v_ans9
+
+# Muda o vetor original da inventario_de_ansiedade_de_beck_tremores_nas_maos para o vetor ajustado do tipo String
+df_ajustado <-
+  df_ajustado |>
+  mutate(
+    inventario_de_ansiedade_de_beck_tremores_nas_maos = v_ans9$value
+  ) |>
+  mutate(
+    inventario_de_ansiedade_de_beck_tremores_nas_maos = as.integer(inventario_de_ansiedade_de_beck_tremores_nas_maos)
+  )
+
+# inventario_de_ansiedade_de_beck_tremores_nas_maos
+# tira da lista e cria um vetor(porém as linhas erradas foram excluidas)
+ans10 <- unlist(df$inventario_de_ansiedade_de_beck_tremores_nas_maos,
+                use.names = TRUE)
+
+# converte em tibble
+ans10 <- as_tibble(ans10)
+ans10 <-
+  ans10 |>
+  mutate(value = as.character(value))
+
+# cria um vetor de NA para incluir nas linhas erradas
+c_ans10 <- c("NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA")
+
+# converte em tibble
+c_ans10 <- as_tibble(c_ans10)
+c_ans10
+
+# Empilha as linhas para ter um vetor de 10110 linhas e, assim, poder juntar no df original
+v_ans10 <- bind_rows(ans10, c_ans10)
+v_ans10
+
+# Muda o vetor original da inventario_de_ansiedade_de_beck_tremores_nas_maos para o vetor ajustado do tipo String
+df_ajustado <-
+  df_ajustado |>
+  mutate(
+    inventario_de_ansiedade_de_beck_tremores_nas_maos = v_ans10$value
+  ) |>
+  mutate(
+    inventario_de_ansiedade_de_beck_tremores_nas_maos = as.integer(inventario_de_ansiedade_de_beck_tremores_nas_maos)
+  )
+# inventario_de_depressao_de_beck_questao_11
+# tira da lista e cria um vetor(porém as linhas erradas foram excluidas)
+dep1 <- unlist(df$inventario_de_depressao_de_beck_questao_11,
+               use.names = TRUE)
+
+# converte em tibble
+dep1 <- as_tibble(dep1)
+dep1 <-
+  dep1 |>
+  mutate(value = as.character(value))
+
+# cria um vetor de NA para incluir nas linhas erradas
+c_dep1 <- c("NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA")
+
+# converte em tibble
+c_dep1 <- as_tibble(c_dep1)
+c_dep1
+
+# Empilha as linhas para ter um vetor de 111 linhas e, assim, poder juntar no df original
+v_dep1 <- bind_rows(dep1, c_dep1)
+v_dep1
+
+# Muda o vetor original da inventario_de_depressao_de_beck_questao_11 para o vetor ajustado do tipo String
+df_ajustado <-
+  df_ajustado |>
+  mutate(
+    inventario_de_depressao_de_beck_questao_11 = v_dep1$value
+  ) |>
+  mutate(
+    inventario_de_depressao_de_beck_questao_11 = as.integer(inventario_de_depressao_de_beck_questao_11)
+  )
+
+# inventario_de_depressao_de_beck_questao_12
+# tira da lista e cria um vetor(porém as linhas erradas foram excluidas)
+dep2 <- unlist(df$inventario_de_depressao_de_beck_questao_12,
+               use.names = TRUE)
+
+# converte em tibble
+dep2 <- as_tibble(dep2)
+dep2 <-
+  dep2 |>
+  mutate(value = as.character(value))
+
+# cria um vetor de NA para incluir nas linhas erradas
+c_dep2 <- c("NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA")
+
+# converte em tibble
+c_dep2 <- as_tibble(c_dep2)
+c_dep2
+
+# Empilha as linhas para ter um vetor de 111 linhas e, assim, poder juntar no df original
+v_dep2 <- bind_rows(dep2, c_dep2)
+v_dep2
+
+# Muda o vetor original da inventario_de_depressao_de_beck_questao_12 para o vetor ajustado do tipo String
+df_ajustado <-
+  df_ajustado |>
+  mutate(
+    inventario_de_depressao_de_beck_questao_12 = v_dep2$value
+  ) |>
+  mutate(
+    inventario_de_depressao_de_beck_questao_12 = as.integer(inventario_de_depressao_de_beck_questao_12)
+  )
+
+# inventario_de_depressao_de_beck_questao_19
+# tira da lista e cria um vetor(porém as linhas erradas foram excluidas)
+dep3 <- unlist(df$inventario_de_depressao_de_beck_questao_19,
+               use.names = TRUE)
+
+# converte em tibble
+dep3 <- as_tibble(dep3)
+dep3 <-
+  dep3 |>
+  mutate(value = as.character(value))
+
+# cria um vetor de NA para incluir nas linhas erradas
+c_dep3 <- c("NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA")
+
+# converte em tibble
+c_dep3 <- as_tibble(c_dep3)
+c_dep3
+
+# Empilha as linhas para ter um vetor de 111 linhas e, assim, poder juntar no df original
+v_dep3 <- bind_rows(dep3, c_dep3)
+v_dep3
+
+# Muda o vetor original da inventario_de_depressao_de_beck_questao_19 para o vetor ajustado do tipo String
+df_ajustado <-
+  df_ajustado |>
+  mutate(
+    inventario_de_depressao_de_beck_questao_19 = v_dep3$value
+  ) |>
+  mutate(
+    inventario_de_depressao_de_beck_questao_19 = as.integer(inventario_de_depressao_de_beck_questao_19)
+  )
+
 df_ajustado |>
   select(where(is.list)) |>
   glimpse()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
