@@ -652,8 +652,660 @@ df_ajustado <-
     inventario_de_depressao_de_beck_questao_19 = as.integer(inventario_de_depressao_de_beck_questao_19)
   )
 
-df_ajustado |>
-  select(where(is.list)) |>
-  glimpse()
+# the_world_health_organization_quality_of_life_whoqol_bref_como_voce_avaliaria_sua_qualidade_de_vida
+# tira da lista e cria um vetor(porém as linhas erradas foram excluidas)
+who1 <- unlist(df$the_world_health_organization_quality_of_life_whoqol_bref_como_voce_avaliaria_sua_qualidade_de_vida,
+               use.names = TRUE)
+
+# converte em tibble
+who1 <- as_tibble(who1)
+who1 <-
+  who1 |>
+  mutate(value = as.character(value))
+
+# cria um vetor de NA para incluir nas linhas erradas
+c_who1 <- c("NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA")
+
+# converte em tibble
+c_who1 <- as_tibble(c_who1)
+c_who1
+
+# Empilha as linhas para ter um vetor de 111 linhas e, assim, poder juntar no df original
+v_who1 <- bind_rows(who1, c_who1)
+v_who1
+
+# Muda o vetor original da the_world_health_organization_quality_of_life_whoqol_bref_como_voce_avaliaria_sua_qualidade_de_vida para o vetor ajustado do tipo String
+df_ajustado <-
+  df_ajustado |>
+  mutate(
+    the_world_health_organization_quality_of_life_whoqol_bref_como_voce_avaliaria_sua_qualidade_de_vida = v_who1$value
+  ) |>
+  mutate(
+    the_world_health_organization_quality_of_life_whoqol_bref_como_voce_avaliaria_sua_qualidade_de_vida = as.integer(the_world_health_organization_quality_of_life_whoqol_bref_como_voce_avaliaria_sua_qualidade_de_vida)
+  )
+
+# the_world_health_organization_quality_of_life_whoqol_bref_quao_satisfeito_a_voce_esta_com_a_sua_saude
+# tira da lista e cria um vetor(porém as linhas erradas foram excluidas)
+who2 <- unlist(df$the_world_health_organization_quality_of_life_whoqol_bref_quao_satisfeito_a_voce_esta_com_a_sua_saude,
+               use.names = TRUE)
+
+# converte em tibble
+who2 <- as_tibble(who2)
+who2 <-
+  who2 |>
+  mutate(value = as.character(value))
+
+# cria um vetor de NA para incluir nas linhas erradas
+c_who2 <- c("NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA")
+
+# converte em tibble
+c_who2 <- as_tibble(c_who2)
+c_who2
+
+# Empilha as linhas para ter um vetor de 111 linhas e, assim, poder juntar no df original
+v_who2 <- bind_rows(who2, c_who2)
+v_who2
+
+# Muda o vetor original da the_world_health_organization_quality_of_life_whoqol_bref_quao_satisfeito_a_voce_esta_com_a_sua_saude para o vetor ajustado do tipo String
+df_ajustado <-
+  df_ajustado |>
+  mutate(
+    the_world_health_organization_quality_of_life_whoqol_bref_quao_satisfeito_a_voce_esta_com_a_sua_saude = v_who2$value
+  ) |>
+  mutate(
+    the_world_health_organization_quality_of_life_whoqol_bref_quao_satisfeito_a_voce_esta_com_a_sua_saude = as.integer(the_world_health_organization_quality_of_life_whoqol_bref_quao_satisfeito_a_voce_esta_com_a_sua_saude)
+  )
+
+# the_world_health_organization_quality_of_life_whoqol_bref_em_que_medida_voce_acha_que_sua_dor_fisica_impede_voce_de_fazer_o_que_voce_precisa
+# tira da lista e cria um vetor(porém as linhas erradas foram excluidas)
+who3 <- unlist(df$the_world_health_organization_quality_of_life_whoqol_bref_em_que_medida_voce_acha_que_sua_dor_fisica_impede_voce_de_fazer_o_que_voce_precisa,
+               use.names = TRUE)
+
+# converte em tibble
+who3 <- as_tibble(who3)
+who3 <-
+  who3 |>
+  mutate(value = as.character(value))
+
+# cria um vetor de NA para incluir nas linhas erradas
+c_who3 <- c("NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA")
+
+# converte em tibble
+c_who3 <- as_tibble(c_who3)
+c_who3
+
+# Empilha as linhas para ter um vetor de 111 linhas e, assim, poder juntar no df original
+v_who3 <- bind_rows(who3, c_who3)
+v_who3
+
+# Muda o vetor original da the_world_health_organization_quality_of_life_whoqol_bref_em_que_medida_voce_acha_que_sua_dor_fisica_impede_voce_de_fazer_o_que_voce_precisa para o vetor ajustado do tipo String
+df_ajustado <-
+  df_ajustado |>
+  mutate(
+    the_world_health_organization_quality_of_life_whoqol_bref_em_que_medida_voce_acha_que_sua_dor_fisica_impede_voce_de_fazer_o_que_voce_precisa = v_who3$value
+  ) |>
+  mutate(
+    the_world_health_organization_quality_of_life_whoqol_bref_em_que_medida_voce_acha_que_sua_dor_fisica_impede_voce_de_fazer_o_que_voce_precisa = as.integer(the_world_health_organization_quality_of_life_whoqol_bref_em_que_medida_voce_acha_que_sua_dor_fisica_impede_voce_de_fazer_o_que_voce_precisa)
+  )
+
+# the_world_health_organization_quality_of_life_whoqol_bref_o_quanto_voce_precisa_de_algum_tratamento_medico_para_levar_sua_vida_diaria
+# tira da lista e cria um vetor(porém as linhas erradas foram excluidas)
+who4 <- unlist(df$the_world_health_organization_quality_of_life_whoqol_bref_o_quanto_voce_precisa_de_algum_tratamento_medico_para_levar_sua_vida_diaria,
+               use.names = TRUE)
+
+# converte em tibble
+who4 <- as_tibble(who4)
+who4 <-
+  who4 |>
+  mutate(value = as.character(value))
+
+# cria um vetor de NA para incluir nas linhas erradas
+c_who4 <- c("NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA")
+
+# converte em tibble
+c_who4 <- as_tibble(c_who4)
+c_who4
+
+# Empilha as linhas para ter um vetor de 111 linhas e, assim, poder juntar no df original
+v_who4 <- bind_rows(who4, c_who4)
+v_who4
+
+# Muda o vetor original da the_world_health_organization_quality_of_life_whoqol_bref_o_quanto_voce_precisa_de_algum_tratamento_medico_para_levar_sua_vida_diaria para o vetor ajustado do tipo String
+df_ajustado <-
+  df_ajustado |>
+  mutate(
+    the_world_health_organization_quality_of_life_whoqol_bref_o_quanto_voce_precisa_de_algum_tratamento_medico_para_levar_sua_vida_diaria = v_who4$value
+  ) |>
+  mutate(
+    the_world_health_organization_quality_of_life_whoqol_bref_o_quanto_voce_precisa_de_algum_tratamento_medico_para_levar_sua_vida_diaria = as.integer(the_world_health_organization_quality_of_life_whoqol_bref_o_quanto_voce_precisa_de_algum_tratamento_medico_para_levar_sua_vida_diaria)
+  )
+
+# the_world_health_organization_quality_of_life_whoqol_bref_o_quanto_voce_aproveita_a_vida
+# tira da lista e cria um vetor(porém as linhas erradas foram excluidas)
+who5 <- unlist(df$the_world_health_organization_quality_of_life_whoqol_bref_o_quanto_voce_aproveita_a_vida,
+               use.names = TRUE)
+
+# converte em tibble
+who5 <- as_tibble(who5)
+who5 <-
+  who5 |>
+  mutate(value = as.character(value))
+
+# cria um vetor de NA para incluir nas linhas erradas
+c_who5 <- c("NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA")
+
+# converte em tibble
+c_who5 <- as_tibble(c_who5)
+c_who5
+
+# Empilha as linhas para ter um vetor de 111 linhas e, assim, poder juntar no df original
+v_who5 <- bind_rows(who5, c_who5)
+v_who5
+
+# Muda o vetor original da the_world_health_organization_quality_of_life_whoqol_bref_o_quanto_voce_aproveita_a_vida para o vetor ajustado do tipo String
+df_ajustado <-
+  df_ajustado |>
+  mutate(
+    the_world_health_organization_quality_of_life_whoqol_bref_o_quanto_voce_aproveita_a_vida = v_who5$value
+  ) |>
+  mutate(
+    the_world_health_organization_quality_of_life_whoqol_bref_o_quanto_voce_aproveita_a_vida = as.integer(the_world_health_organization_quality_of_life_whoqol_bref_o_quanto_voce_aproveita_a_vida)
+  )
+
+# the_world_health_organization_quality_of_life_whoqol_bref_em_que_medida_voce_acha_que_a_sua_vida_tem_sentido
+# tira da lista e cria um vetor(porém as linhas erradas foram excluidas)
+who6 <- unlist(df$the_world_health_organization_quality_of_life_whoqol_bref_em_que_medida_voce_acha_que_a_sua_vida_tem_sentido,
+               use.names = TRUE)
+
+# converte em tibble
+who6 <- as_tibble(who6)
+who6 <-
+  who6 |>
+  mutate(value = as.character(value))
+
+# cria um vetor de NA para incluir nas linhas erradas
+c_who6 <- c("NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA")
+
+# converte em tibble
+c_who6 <- as_tibble(c_who6)
+c_who6
+
+# Empilha as linhas para ter um vetor de 111 linhas e, assim, poder juntar no df original
+v_who6 <- bind_rows(who6, c_who6)
+v_who6
+
+# Muda o vetor original da the_world_health_organization_quality_of_life_whoqol_bref_em_que_medida_voce_acha_que_a_sua_vida_tem_sentido para o vetor ajustado do tipo String
+df_ajustado <-
+  df_ajustado |>
+  mutate(
+    the_world_health_organization_quality_of_life_whoqol_bref_em_que_medida_voce_acha_que_a_sua_vida_tem_sentido = v_who6$value
+  ) |>
+  mutate(
+    the_world_health_organization_quality_of_life_whoqol_bref_em_que_medida_voce_acha_que_a_sua_vida_tem_sentido = as.integer(the_world_health_organization_quality_of_life_whoqol_bref_em_que_medida_voce_acha_que_a_sua_vida_tem_sentido)
+  )
+
+# the_world_health_organization_quality_of_life_whoqol_bref_o_quanto_voce_consegue_se_concentrar
+# tira da lista e cria um vetor(porém as linhas erradas foram excluidas)
+who7 <- unlist(df$the_world_health_organization_quality_of_life_whoqol_bref_o_quanto_voce_consegue_se_concentrar,
+               use.names = TRUE)
+
+# converte em tibble
+who7 <- as_tibble(who7)
+who7 <-
+  who7 |>
+  mutate(value = as.character(value))
+
+# cria um vetor de NA para incluir nas linhas erradas
+c_who7 <- c("NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA")
+
+# converte em tibble
+c_who7 <- as_tibble(c_who7)
+c_who7
+
+# Empilha as linhas para ter um vetor de 111 linhas e, assim, poder juntar no df original
+v_who7 <- bind_rows(who7, c_who7)
+v_who7
+
+# Muda o vetor original da the_world_health_organization_quality_of_life_whoqol_bref_o_quanto_voce_consegue_se_concentrar para o vetor ajustado do tipo String
+df_ajustado <-
+  df_ajustado |>
+  mutate(
+    the_world_health_organization_quality_of_life_whoqol_bref_o_quanto_voce_consegue_se_concentrar = v_who7$value
+  ) |>
+  mutate(
+    the_world_health_organization_quality_of_life_whoqol_bref_o_quanto_voce_consegue_se_concentrar = as.integer(the_world_health_organization_quality_of_life_whoqol_bref_o_quanto_voce_consegue_se_concentrar)
+  )
+
+# the_world_health_organization_quality_of_life_whoqol_bref_voce_e_capaz_de_aceitar_sua_aparencia_fisica
+# tira da lista e cria um vetor(porém as linhas erradas foram excluidas)
+who8 <- unlist(df$the_world_health_organization_quality_of_life_whoqol_bref_voce_e_capaz_de_aceitar_sua_aparencia_fisica,
+               use.names = TRUE)
+
+# converte em tibble
+who8 <- as_tibble(who8)
+who8 <-
+  who8 |>
+  mutate(value = as.character(value))
+
+# cria um vetor de NA para incluir nas linhas erradas
+c_who8 <- c("NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA")
+
+# converte em tibble
+c_who8 <- as_tibble(c_who8)
+c_who8
+
+# Empilha as linhas para ter um vetor de 111 linhas e, assim, poder juntar no df original
+v_who8 <- bind_rows(who8, c_who8)
+v_who8
+
+# Muda o vetor original da the_world_health_organization_quality_of_life_whoqol_bref_voce_e_capaz_de_aceitar_sua_aparencia_fisica para o vetor ajustado do tipo String
+df_ajustado <-
+  df_ajustado |>
+  mutate(
+    the_world_health_organization_quality_of_life_whoqol_bref_voce_e_capaz_de_aceitar_sua_aparencia_fisica = v_who8$value
+  ) |>
+  mutate(
+    the_world_health_organization_quality_of_life_whoqol_bref_voce_e_capaz_de_aceitar_sua_aparencia_fisica = as.integer(the_world_health_organization_quality_of_life_whoqol_bref_voce_e_capaz_de_aceitar_sua_aparencia_fisica)
+  )
+
+# the_world_health_organization_quality_of_life_whoqol_bref_voce_tem_dinheiro_suficiente_para_satisfazer_suas_necessidades
+# tira da lista e cria um vetor(porém as linhas erradas foram excluidas)
+who9 <- unlist(df$the_world_health_organization_quality_of_life_whoqol_bref_voce_tem_dinheiro_suficiente_para_satisfazer_suas_necessidades,
+               use.names = TRUE)
+
+# converte em tibble
+who9 <- as_tibble(who9)
+who9 <-
+  who9 |>
+  mutate(value = as.character(value))
+
+# cria um vetor de NA para incluir nas linhas erradas
+c_who9 <- c("NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA")
+
+# converte em tibble
+c_who9 <- as_tibble(c_who9)
+c_who9
+
+# Empilha as linhas para ter um vetor de 111 linhas e, assim, poder juntar no df original
+v_who9 <- bind_rows(who9, c_who9)
+v_who9
+
+# Muda o vetor original da the_world_health_organization_quality_of_life_whoqol_bref_voce_tem_dinheiro_suficiente_para_satisfazer_suas_necessidades para o vetor ajustado do tipo String
+df_ajustado <-
+  df_ajustado |>
+  mutate(
+    the_world_health_organization_quality_of_life_whoqol_bref_voce_tem_dinheiro_suficiente_para_satisfazer_suas_necessidades = v_who9$value
+  ) |>
+  mutate(
+    the_world_health_organization_quality_of_life_whoqol_bref_voce_tem_dinheiro_suficiente_para_satisfazer_suas_necessidades = as.integer(the_world_health_organization_quality_of_life_whoqol_bref_voce_tem_dinheiro_suficiente_para_satisfazer_suas_necessidades)
+  )
+
+# the_world_health_organization_quality_of_life_whoqol_bref_quao_disponiveis_para_voce_estao_as_informacoes_que_precisa_no_seu_dia_a_dia
+# tira da lista e cria um vetor(porém as linhas erradas foram excluidas)
+who10 <- unlist(df$the_world_health_organization_quality_of_life_whoqol_bref_quao_disponiveis_para_voce_estao_as_informacoes_que_precisa_no_seu_dia_a_dia,
+                use.names = TRUE)
+
+# converte em tibble
+who10 <- as_tibble(who10)
+who10 <-
+  who10 |>
+  mutate(value = as.character(value))
+
+# cria um vetor de NA para incluir nas linhas erradas
+c_who10 <- c("NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA")
+
+# converte em tibble
+c_who10 <- as_tibble(c_who10)
+c_who10
+
+# Empilha as linhas para ter um vetor de 111 linhas e, assim, poder juntar no df original
+v_who10 <- bind_rows(who10, c_who10)
+v_who10
+
+# Muda o vetor original da the_world_health_organization_quality_of_life_whoqol_bref_quao_disponiveis_para_voce_estao_as_informacoes_que_precisa_no_seu_dia_a_dia para o vetor ajustado do tipo String
+df_ajustado <-
+  df_ajustado |>
+  mutate(
+    the_world_health_organization_quality_of_life_whoqol_bref_quao_disponiveis_para_voce_estao_as_informacoes_que_precisa_no_seu_dia_a_dia = v_who10$value
+  ) |>
+  mutate(
+    the_world_health_organization_quality_of_life_whoqol_bref_quao_disponiveis_para_voce_estao_as_informacoes_que_precisa_no_seu_dia_a_dia = as.integer(the_world_health_organization_quality_of_life_whoqol_bref_quao_disponiveis_para_voce_estao_as_informacoes_que_precisa_no_seu_dia_a_dia)
+  )
+
+# the_world_health_organization_quality_of_life_whoqol_bref_quao_bem_voce_e_capaz_de_se_locomover
+# tira da lista e cria um vetor(porém as linhas erradas foram excluidas)
+who11 <- unlist(df$the_world_health_organization_quality_of_life_whoqol_bref_quao_bem_voce_e_capaz_de_se_locomover,
+                use.names = TRUE)
+
+# converte em tibble
+who11 <- as_tibble(who11)
+who11 <-
+  who11 |>
+  mutate(value = as.character(value))
+
+# cria um vetor de NA para incluir nas linhas erradas
+c_who11 <- c("NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA")
+
+# converte em tibble
+c_who11 <- as_tibble(c_who11)
+c_who11
+
+# Empilha as linhas para ter um vetor de 111 linhas e, assim, poder juntar no df original
+v_who11 <- bind_rows(who11, c_who11)
+v_who11
+
+# Muda o vetor original da the_world_health_organization_quality_of_life_whoqol_bref_quao_bem_voce_e_capaz_de_se_locomover para o vetor ajustado do tipo String
+df_ajustado <-
+  df_ajustado |>
+  mutate(
+    the_world_health_organization_quality_of_life_whoqol_bref_quao_bem_voce_e_capaz_de_se_locomover = v_who11$value
+  ) |>
+  mutate(
+    the_world_health_organization_quality_of_life_whoqol_bref_quao_bem_voce_e_capaz_de_se_locomover = as.integer(the_world_health_organization_quality_of_life_whoqol_bref_quao_bem_voce_e_capaz_de_se_locomover)
+  )
+
+# the_world_health_organization_quality_of_life_whoqol_bref_quao_satisfeito_a_voce_esta_com_o_seu_sono
+# tira da lista e cria um vetor(porém as linhas erradas foram excluidas)
+who12 <- unlist(df$the_world_health_organization_quality_of_life_whoqol_bref_quao_satisfeito_a_voce_esta_com_o_seu_sono,
+                use.names = TRUE)
+
+# converte em tibble
+who12 <- as_tibble(who12)
+who12 <-
+  who12 |>
+  mutate(value = as.character(value))
+
+# cria um vetor de NA para incluir nas linhas erradas
+c_who12 <- c("NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA")
+
+# converte em tibble
+c_who12 <- as_tibble(c_who12)
+c_who12
+
+# Empilha as linhas para ter um vetor de 111 linhas e, assim, poder juntar no df original
+v_who12 <- bind_rows(who12, c_who12)
+v_who12
+
+# Muda o vetor original da the_world_health_organization_quality_of_life_whoqol_bref_quao_satisfeito_a_voce_esta_com_o_seu_sono para o vetor ajustado do tipo String
+df_ajustado <-
+  df_ajustado |>
+  mutate(
+    the_world_health_organization_quality_of_life_whoqol_bref_quao_satisfeito_a_voce_esta_com_o_seu_sono = v_who12$value
+  ) |>
+  mutate(
+    the_world_health_organization_quality_of_life_whoqol_bref_quao_satisfeito_a_voce_esta_com_o_seu_sono = as.integer(the_world_health_organization_quality_of_life_whoqol_bref_quao_satisfeito_a_voce_esta_com_o_seu_sono)
+  )
+
+# the_world_health_organization_quality_of_life_whoqol_bref_quao_satisfeito_a_voce_esta_com_sua_capacidade_de_desempenhar_as_atividades_do_seu_dia_a_dia
+# tira da lista e cria um vetor(porém as linhas erradas foram excluidas)
+who13 <- unlist(df$the_world_health_organization_quality_of_life_whoqol_bref_quao_satisfeito_a_voce_esta_com_sua_capacidade_de_desempenhar_as_atividades_do_seu_dia_a_dia,
+                use.names = TRUE)
+
+# converte em tibble
+who13 <- as_tibble(who13)
+who13 <-
+  who13 |>
+  mutate(value = as.character(value))
+
+# cria um vetor de NA para incluir nas linhas erradas
+c_who13 <- c("NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA")
+
+# converte em tibble
+c_who13 <- as_tibble(c_who13)
+c_who13
+
+# Empilha as linhas para ter um vetor de 111 linhas e, assim, poder juntar no df original
+v_who13 <- bind_rows(who13, c_who13)
+v_who13
+
+# Muda o vetor original da the_world_health_organization_quality_of_life_whoqol_bref_quao_satisfeito_a_voce_esta_com_sua_capacidade_de_desempenhar_as_atividades_do_seu_dia_a_dia para o vetor ajustado do tipo String
+df_ajustado <-
+  df_ajustado |>
+  mutate(
+    the_world_health_organization_quality_of_life_whoqol_bref_quao_satisfeito_a_voce_esta_com_sua_capacidade_de_desempenhar_as_atividades_do_seu_dia_a_dia = v_who13$value
+  ) |>
+  mutate(
+    the_world_health_organization_quality_of_life_whoqol_bref_quao_satisfeito_a_voce_esta_com_sua_capacidade_de_desempenhar_as_atividades_do_seu_dia_a_dia = as.integer(the_world_health_organization_quality_of_life_whoqol_bref_quao_satisfeito_a_voce_esta_com_sua_capacidade_de_desempenhar_as_atividades_do_seu_dia_a_dia)
+  )
+
+# the_world_health_organization_quality_of_life_whoqol_bref_quao_satisfeito_a_voce_esta_com_suas_relacoes_pessoais_amigos_parentes_conhecidos_colegas
+# tira da lista e cria um vetor(porém as linhas erradas foram excluidas)
+who14 <- unlist(df$the_world_health_organization_quality_of_life_whoqol_bref_quao_satisfeito_a_voce_esta_com_suas_relacoes_pessoais_amigos_parentes_conhecidos_colegas,
+                use.names = TRUE)
+
+# converte em tibble
+who14 <- as_tibble(who14)
+who14 <-
+  who14 |>
+  mutate(value = as.character(value))
+
+# cria um vetor de NA para incluir nas linhas erradas
+c_who14 <- c("NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA")
+
+# converte em tibble
+c_who14 <- as_tibble(c_who14)
+c_who14
+
+# Empilha as linhas para ter um vetor de 111 linhas e, assim, poder juntar no df original
+v_who14 <- bind_rows(who14, c_who14)
+v_who14
+
+# Muda o vetor original da the_world_health_organization_quality_of_life_whoqol_bref_quao_satisfeito_a_voce_esta_com_suas_relacoes_pessoais_amigos_parentes_conhecidos_colegas para o vetor ajustado do tipo String
+df_ajustado <-
+  df_ajustado |>
+  mutate(
+    the_world_health_organization_quality_of_life_whoqol_bref_quao_satisfeito_a_voce_esta_com_suas_relacoes_pessoais_amigos_parentes_conhecidos_colegas = v_who14$value
+  ) |>
+  mutate(
+    the_world_health_organization_quality_of_life_whoqol_bref_quao_satisfeito_a_voce_esta_com_suas_relacoes_pessoais_amigos_parentes_conhecidos_colegas = as.integer(the_world_health_organization_quality_of_life_whoqol_bref_quao_satisfeito_a_voce_esta_com_suas_relacoes_pessoais_amigos_parentes_conhecidos_colegas)
+  )
+
+# the_world_health_organization_quality_of_life_whoqol_bref_quao_satisfeito_a_voce_esta_com_sua_vida_sexual
+# tira da lista e cria um vetor(porém as linhas erradas foram excluidas)
+who15 <- unlist(df$the_world_health_organization_quality_of_life_whoqol_bref_quao_satisfeito_a_voce_esta_com_sua_vida_sexual,
+                use.names = TRUE)
+
+# converte em tibble
+who15 <- as_tibble(who15)
+who15 <-
+  who15 |>
+  mutate(value = as.character(value))
+
+# cria um vetor de NA para incluir nas linhas erradas
+c_who15 <- c("NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA")
+
+# converte em tibble
+c_who15 <- as_tibble(c_who15)
+c_who15
+
+# Empilha as linhas para ter um vetor de 111 linhas e, assim, poder juntar no df original
+v_who15 <- bind_rows(who15, c_who15)
+v_who15
+
+# Muda o vetor original da the_world_health_organization_quality_of_life_whoqol_bref_quao_satisfeito_a_voce_esta_com_sua_vida_sexual para o vetor ajustado do tipo String
+df_ajustado <-
+  df_ajustado |>
+  mutate(
+    the_world_health_organization_quality_of_life_whoqol_bref_quao_satisfeito_a_voce_esta_com_sua_vida_sexual = v_who15$value
+  ) |>
+  mutate(
+    the_world_health_organization_quality_of_life_whoqol_bref_quao_satisfeito_a_voce_esta_com_sua_vida_sexual = as.integer(the_world_health_organization_quality_of_life_whoqol_bref_quao_satisfeito_a_voce_esta_com_sua_vida_sexual)
+  )
+
+# the_world_health_organization_quality_of_life_whoqol_bref_com_que_frequencia_voce_tem_sentimentos_negativos_tais_como_mau_humor_desespero_ansiedade_depressao
+# tira da lista e cria um vetor(porém as linhas erradas foram excluidas)
+who16 <- unlist(df$the_world_health_organization_quality_of_life_whoqol_bref_com_que_frequencia_voce_tem_sentimentos_negativos_tais_como_mau_humor_desespero_ansiedade_depressao,
+                use.names = TRUE)
+
+# converte em tibble
+who16 <- as_tibble(who16)
+who16 <-
+  who16 |>
+  mutate(value = as.character(value))
+
+# cria um vetor de NA para incluir nas linhas erradas
+c_who16 <- c("NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA")
+
+# converte em tibble
+c_who16 <- as_tibble(c_who16)
+c_who16
+
+# Empilha as linhas para ter um vetor de 111 linhas e, assim, poder juntar no df original
+v_who16 <- bind_rows(who16, c_who16)
+v_who16
+
+# Muda o vetor original da the_world_health_organization_quality_of_life_whoqol_bref_com_que_frequencia_voce_tem_sentimentos_negativos_tais_como_mau_humor_desespero_ansiedade_depressao para o vetor ajustado do tipo String
+df_ajustado <-
+  df_ajustado |>
+  mutate(
+    the_world_health_organization_quality_of_life_whoqol_bref_com_que_frequencia_voce_tem_sentimentos_negativos_tais_como_mau_humor_desespero_ansiedade_depressao = v_who16$value
+  ) |>
+  mutate(
+    the_world_health_organization_quality_of_life_whoqol_bref_com_que_frequencia_voce_tem_sentimentos_negativos_tais_como_mau_humor_desespero_ansiedade_depressao = as.integer(the_world_health_organization_quality_of_life_whoqol_bref_com_que_frequencia_voce_tem_sentimentos_negativos_tais_como_mau_humor_desespero_ansiedade_depressao)
+  )
+
+# Ajustando as colunas circunferencia de cintura e quadril
+df_ajustado <-
+  df_ajustado |>
+  # separando as tentativas do circunferencia cintura
+  separate(
+    col = circ_cintura,
+    into = c("circ_cintura_1","circ_cintura_2","circ_cintura_3"),
+    sep = "/",
+    convert = TRUE
+  ) |>
+  # convertendo o circunferencia cintura para numerico
+  mutate(circ_cintura_1 = as.numeric(circ_cintura_1),
+         circ_cintura_2 = as.numeric(circ_cintura_2),
+         circ_cintura_3 = as.numeric(circ_cintura_3)) |>
+  # separando as tentativas do circunferencia quadril
+  separate(
+    col = circ_quadril,
+    into = c("circ_quadril_1","circ_quadril_2","circ_quadril_3"),
+    sep = "/",
+    convert = TRUE
+  ) |>
+  # convertendo o circunferencia quadril para numerico
+  mutate(circ_quadril_1 = as.numeric(circ_quadril_1),
+         circ_quadril_2 = as.numeric(circ_quadril_2),
+         circ_quadril_3 = as.numeric(circ_quadril_3))
+
+# Ajustando as variáveis HAS e DM
+has <- str_detect(string = df_ajustado$comorbidades_13,
+                  pattern = "hipertensao arterial")
+
+dm <- str_detect(string = df_ajustado$comorbidades_13,
+                 pattern = "diabetes")
+
+df_ajustado <-
+  df_ajustado |>
+  mutate(
+    has = case_when(has == TRUE ~ 1,
+                    has != TRUE ~ 0),
+    dm = case_when(dm == TRUE ~ 1,
+                   dm != TRUE ~ 0),
+  ) |>
+  mutate(
+    has = as.integer(has),
+    dm = as.integer(dm)
+  )
 
 
+# Ajustando as variáveis medicamentos
+metformina = str_detect(string = df_ajustado$medicamentos_de_uso_continuo_em_caso_de_nenhum_escrever_nenhum,
+                        pattern = "met")
+
+losartana = str_detect(string = df_ajustado$medicamentos_de_uso_continuo_em_caso_de_nenhum_escrever_nenhum,
+                        pattern = "losa")
+
+hidroclorotiazida = str_detect(string = df_ajustado$medicamentos_de_uso_continuo_em_caso_de_nenhum_escrever_nenhum,
+                       pattern = "hidro")
+
+enalapril = str_detect(string = df_ajustado$medicamentos_de_uso_continuo_em_caso_de_nenhum_escrever_nenhum,
+                       pattern = "ena")
+
+atenolol = str_detect(string = df_ajustado$medicamentos_de_uso_continuo_em_caso_de_nenhum_escrever_nenhum,
+                       pattern = "aten")
+
+
+df_ajustado <-
+  df_ajustado |>
+  mutate(
+    metformina = case_when(metformina == TRUE ~ 1,
+                           metformina != TRUE ~ 0,
+                           is.na(metformina) ~ 0),
+    losartana = case_when(losartana == TRUE  ~ 1,
+                          losartana != TRUE  ~ 0,
+                          is.na(losartana) ~ 0),
+    hidroclorotiazida = case_when(hidroclorotiazida == TRUE  ~ 1,
+                                  hidroclorotiazida != TRUE  ~ 0,
+                                  is.na(hidroclorotiazida) ~ 0),
+    enalapril = case_when(enalapril == TRUE  ~ 1,
+                          enalapril != TRUE  ~ 0,
+                          is.na(enalapril) ~ 0),
+    atenolol = case_when(atenolol == TRUE  ~ 1,
+                         atenolol != TRUE  ~ 0,
+                         is.na(atenolol) ~ 0)
+  ) |>
+  mutate(
+    metformina = as.integer(metformina),
+    losartana = as.integer(losartana),
+    hidroclorotiazida = as.integer(hidroclorotiazida),
+    enalapril = as.integer(enalapril),
+    atenolol = as.integer(atenolol)
+  ) |>
+  select(-comorbidades_13,
+         -medicamentos_de_uso_continuo_em_caso_de_nenhum_escrever_nenhum)
+
+### Ajustando variáveis para insegurança alimentar
+df_ajustado <-
+  df_ajustado |>
+  mutate(
+    x1_nos_ultimos_tres_meses_os_moradores_deste_domicilio_tiveram_preocupacao_de_que_os_alimentos_acabassem_antes_de_poderem_comprar_ou_receber_mais_comida = case_when(x1_nos_ultimos_tres_meses_os_moradores_deste_domicilio_tiveram_preocupacao_de_que_os_alimentos_acabassem_antes_de_poderem_comprar_ou_receber_mais_comida == "sim" ~ 1,
+                                                                                                                                                                         x1_nos_ultimos_tres_meses_os_moradores_deste_domicilio_tiveram_preocupacao_de_que_os_alimentos_acabassem_antes_de_poderem_comprar_ou_receber_mais_comida != "sim" ~ 0),
+    x2_nos_ultimos_tres_meses_os_alimentos_acabaram_antes_que_os_moradores_deste_domicilio_tivessem_dinheiro_para_comprar_mais_comida = case_when(x2_nos_ultimos_tres_meses_os_alimentos_acabaram_antes_que_os_moradores_deste_domicilio_tivessem_dinheiro_para_comprar_mais_comida == "sim" ~ 1,
+                                                                                                                                                  x2_nos_ultimos_tres_meses_os_alimentos_acabaram_antes_que_os_moradores_deste_domicilio_tivessem_dinheiro_para_comprar_mais_comida != "sim" ~ 0),
+    x3_nos_ultimos_tres_meses_os_moradores_deste_domicilio_ficaram_sem_dinheiro_para_ter_uma_alimentacao_saudavel_e_variada = case_when(x3_nos_ultimos_tres_meses_os_moradores_deste_domicilio_ficaram_sem_dinheiro_para_ter_uma_alimentacao_saudavel_e_variada == "sim" ~ 1,
+                                                                                                                                        x3_nos_ultimos_tres_meses_os_moradores_deste_domicilio_ficaram_sem_dinheiro_para_ter_uma_alimentacao_saudavel_e_variada != "sim" ~ 0),
+    x4_nos_ultimos_tres_meses_os_moradores_deste_domicilio_comeram_apenas_alguns_alimentos_que_ainda_tinham_porque_o_dinheiro_acabou = case_when(x4_nos_ultimos_tres_meses_os_moradores_deste_domicilio_comeram_apenas_alguns_alimentos_que_ainda_tinham_porque_o_dinheiro_acabou == "sim" ~ 1,
+                                                                                                                                                 x4_nos_ultimos_tres_meses_os_moradores_deste_domicilio_comeram_apenas_alguns_alimentos_que_ainda_tinham_porque_o_dinheiro_acabou != "sim" ~ 0),
+    x5_nos_ultimos_tres_meses_algum_morador_de_18_anos_ou_mais_de_idade_deixou_de_fazer_uma_refeicao_porque_nao_havia_dinheiro_para_comprar_comida = case_when(x5_nos_ultimos_tres_meses_algum_morador_de_18_anos_ou_mais_de_idade_deixou_de_fazer_uma_refeicao_porque_nao_havia_dinheiro_para_comprar_comida == "sim" ~ 1,
+                                                                                                                                                               x5_nos_ultimos_tres_meses_algum_morador_de_18_anos_ou_mais_de_idade_deixou_de_fazer_uma_refeicao_porque_nao_havia_dinheiro_para_comprar_comida != "sim" ~ 0),
+    x6_nos_ultimos_tres_meses_algum_morador_de_18_anos_ou_mais_de_idade_alguma_vez_comeu_menos_do_que_devia_porque_nao_havia_dinheiro_para_comprar_comida = case_when(x6_nos_ultimos_tres_meses_algum_morador_de_18_anos_ou_mais_de_idade_alguma_vez_comeu_menos_do_que_devia_porque_nao_havia_dinheiro_para_comprar_comida == "sim" ~ 1,
+                                                                                                                                                                      x6_nos_ultimos_tres_meses_algum_morador_de_18_anos_ou_mais_de_idade_alguma_vez_comeu_menos_do_que_devia_porque_nao_havia_dinheiro_para_comprar_comida != "sim" ~ 0),
+    x7_nos_ultimos_tres_meses_algum_morador_de_18_anos_ou_mais_de_idade_alguma_vez_sentiu_fome_mas_nao_comeu_porque_nao_havia_dinheiro_para_comprar_comida = case_when(x7_nos_ultimos_tres_meses_algum_morador_de_18_anos_ou_mais_de_idade_alguma_vez_sentiu_fome_mas_nao_comeu_porque_nao_havia_dinheiro_para_comprar_comida == "sim" ~ 1,
+                                                                                                                                                                       x7_nos_ultimos_tres_meses_algum_morador_de_18_anos_ou_mais_de_idade_alguma_vez_sentiu_fome_mas_nao_comeu_porque_nao_havia_dinheiro_para_comprar_comida != "sim" ~ 0),
+    x8_nos_ultimos_tres_meses_algum_morador_de_18_anos_ou_mais_de_idade_alguma_vez_fez_apenas_uma_refeicao_ao_dia_ou_ficou_um_dia_inteiro_sem_comer_porque_nao_havia_dinheiro_para_comprar_comida = case_when(x8_nos_ultimos_tres_meses_algum_morador_de_18_anos_ou_mais_de_idade_alguma_vez_fez_apenas_uma_refeicao_ao_dia_ou_ficou_um_dia_inteiro_sem_comer_porque_nao_havia_dinheiro_para_comprar_comida == "sim" ~ 1,
+                                                                                                                                                                                                              x8_nos_ultimos_tres_meses_algum_morador_de_18_anos_ou_mais_de_idade_alguma_vez_fez_apenas_uma_refeicao_ao_dia_ou_ficou_um_dia_inteiro_sem_comer_porque_nao_havia_dinheiro_para_comprar_comida != "sim" ~ 0),
+    x9_nos_ultimos_tres_meses_algum_morador_com_menos_de_18_anos_de_idade_alguma_vez_deixou_de_ter_uma_alimentacao_saudavel_e_variada_porque_nao_havia_dinheiro_para_comprar_comida = case_when(x9_nos_ultimos_tres_meses_algum_morador_com_menos_de_18_anos_de_idade_alguma_vez_deixou_de_ter_uma_alimentacao_saudavel_e_variada_porque_nao_havia_dinheiro_para_comprar_comida == "sim" ~ 1,
+                                                                                                                                                                                                x9_nos_ultimos_tres_meses_algum_morador_com_menos_de_18_anos_de_idade_alguma_vez_deixou_de_ter_uma_alimentacao_saudavel_e_variada_porque_nao_havia_dinheiro_para_comprar_comida != "sim" ~ 0),
+    x10_nos_ultimos_tres_meses_algum_morador_com_menos_de_18_anos_de_idade_alguma_vez_nao_comeu_quantidade_suficiente_de_comida_porque_nao_havia_dinheiro_para_comprar_comida = case_when(x10_nos_ultimos_tres_meses_algum_morador_com_menos_de_18_anos_de_idade_alguma_vez_nao_comeu_quantidade_suficiente_de_comida_porque_nao_havia_dinheiro_para_comprar_comida == "sim" ~ 1,
+                                                                                                                                                                                          x10_nos_ultimos_tres_meses_algum_morador_com_menos_de_18_anos_de_idade_alguma_vez_nao_comeu_quantidade_suficiente_de_comida_porque_nao_havia_dinheiro_para_comprar_comida != "sim" ~ 0),
+    x11_nos_ultimos_tres_meses_alguma_vez_foi_diminuida_a_quantidade_de_alimentos_das_refeicoes_de_algum_morador_com_menos_de_18_anos_de_idade_porque_nao_havia_dinheiro_para_comprar_comida = case_when(x11_nos_ultimos_tres_meses_alguma_vez_foi_diminuida_a_quantidade_de_alimentos_das_refeicoes_de_algum_morador_com_menos_de_18_anos_de_idade_porque_nao_havia_dinheiro_para_comprar_comida == "sim" ~ 1,
+                                                                                                                                                                                                         x11_nos_ultimos_tres_meses_alguma_vez_foi_diminuida_a_quantidade_de_alimentos_das_refeicoes_de_algum_morador_com_menos_de_18_anos_de_idade_porque_nao_havia_dinheiro_para_comprar_comida != "sim" ~ 0),
+    x12_nos_ultimos_tres_meses_alguma_vez_algum_morador_com_menos_de_18_anos_de_idade_deixou_de_fazer_alguma_refeicao_porque_nao_havia_dinheiro_para_comprar_comida = case_when(x12_nos_ultimos_tres_meses_alguma_vez_algum_morador_com_menos_de_18_anos_de_idade_deixou_de_fazer_alguma_refeicao_porque_nao_havia_dinheiro_para_comprar_comida == "sim" ~ 1,
+                                                                                                                                                                                x12_nos_ultimos_tres_meses_alguma_vez_algum_morador_com_menos_de_18_anos_de_idade_deixou_de_fazer_alguma_refeicao_porque_nao_havia_dinheiro_para_comprar_comida != "sim" ~ 0),
+    x13_nos_ultimos_tres_meses_alguma_vez_algum_morador_com_menos_de_18_anos_de_idade_sentiu_fome_mas_nao_comeu_porque_nao_havia_dinheiro_para_comprar_comida = case_when(x13_nos_ultimos_tres_meses_alguma_vez_algum_morador_com_menos_de_18_anos_de_idade_sentiu_fome_mas_nao_comeu_porque_nao_havia_dinheiro_para_comprar_comida == "sim" ~ 1,
+                                                                                                                                                                          x13_nos_ultimos_tres_meses_alguma_vez_algum_morador_com_menos_de_18_anos_de_idade_sentiu_fome_mas_nao_comeu_porque_nao_havia_dinheiro_para_comprar_comida != "sim" ~ 0),
+    x14_nos_ultimos_tres_meses_alguma_vez_algum_morador_com_menos_de_18_anos_de_idade_fez_apenas_uma_refeicao_ao_dia_ou_ficou_sem_comer_por_um_dia_inteiro_porque_nao_havia_dinheiro_para_comprar_comida = case_when(x14_nos_ultimos_tres_meses_alguma_vez_algum_morador_com_menos_de_18_anos_de_idade_fez_apenas_uma_refeicao_ao_dia_ou_ficou_sem_comer_por_um_dia_inteiro_porque_nao_havia_dinheiro_para_comprar_comida == "sim" ~ 1,
+                                                                                                                                                                                                                     x14_nos_ultimos_tres_meses_alguma_vez_algum_morador_com_menos_de_18_anos_de_idade_fez_apenas_uma_refeicao_ao_dia_ou_ficou_sem_comer_por_um_dia_inteiro_porque_nao_havia_dinheiro_para_comprar_comida != "sim" ~ 0)
+  ) |>
+  mutate(
+    x1_nos_ultimos_tres_meses_os_moradores_deste_domicilio_tiveram_preocupacao_de_que_os_alimentos_acabassem_antes_de_poderem_comprar_ou_receber_mais_comida = as.integer(x1_nos_ultimos_tres_meses_os_moradores_deste_domicilio_tiveram_preocupacao_de_que_os_alimentos_acabassem_antes_de_poderem_comprar_ou_receber_mais_comida),
+    x2_nos_ultimos_tres_meses_os_alimentos_acabaram_antes_que_os_moradores_deste_domicilio_tivessem_dinheiro_para_comprar_mais_comida = as.integer(x2_nos_ultimos_tres_meses_os_alimentos_acabaram_antes_que_os_moradores_deste_domicilio_tivessem_dinheiro_para_comprar_mais_comida),
+    x3_nos_ultimos_tres_meses_os_moradores_deste_domicilio_ficaram_sem_dinheiro_para_ter_uma_alimentacao_saudavel_e_variada = as.integer(x3_nos_ultimos_tres_meses_os_moradores_deste_domicilio_ficaram_sem_dinheiro_para_ter_uma_alimentacao_saudavel_e_variada),
+    x4_nos_ultimos_tres_meses_os_moradores_deste_domicilio_comeram_apenas_alguns_alimentos_que_ainda_tinham_porque_o_dinheiro_acabou = as.integer(x4_nos_ultimos_tres_meses_os_moradores_deste_domicilio_comeram_apenas_alguns_alimentos_que_ainda_tinham_porque_o_dinheiro_acabou),
+    x5_nos_ultimos_tres_meses_algum_morador_de_18_anos_ou_mais_de_idade_deixou_de_fazer_uma_refeicao_porque_nao_havia_dinheiro_para_comprar_comida = as.integer(x5_nos_ultimos_tres_meses_algum_morador_de_18_anos_ou_mais_de_idade_deixou_de_fazer_uma_refeicao_porque_nao_havia_dinheiro_para_comprar_comida),
+    x6_nos_ultimos_tres_meses_algum_morador_de_18_anos_ou_mais_de_idade_alguma_vez_comeu_menos_do_que_devia_porque_nao_havia_dinheiro_para_comprar_comida = as.integer(x6_nos_ultimos_tres_meses_algum_morador_de_18_anos_ou_mais_de_idade_alguma_vez_comeu_menos_do_que_devia_porque_nao_havia_dinheiro_para_comprar_comida),
+    x7_nos_ultimos_tres_meses_algum_morador_de_18_anos_ou_mais_de_idade_alguma_vez_sentiu_fome_mas_nao_comeu_porque_nao_havia_dinheiro_para_comprar_comida = as.integer(x7_nos_ultimos_tres_meses_algum_morador_de_18_anos_ou_mais_de_idade_alguma_vez_sentiu_fome_mas_nao_comeu_porque_nao_havia_dinheiro_para_comprar_comida),
+    x8_nos_ultimos_tres_meses_algum_morador_de_18_anos_ou_mais_de_idade_alguma_vez_fez_apenas_uma_refeicao_ao_dia_ou_ficou_um_dia_inteiro_sem_comer_porque_nao_havia_dinheiro_para_comprar_comida = as.integer(x8_nos_ultimos_tres_meses_algum_morador_de_18_anos_ou_mais_de_idade_alguma_vez_fez_apenas_uma_refeicao_ao_dia_ou_ficou_um_dia_inteiro_sem_comer_porque_nao_havia_dinheiro_para_comprar_comida),
+    x9_nos_ultimos_tres_meses_algum_morador_com_menos_de_18_anos_de_idade_alguma_vez_deixou_de_ter_uma_alimentacao_saudavel_e_variada_porque_nao_havia_dinheiro_para_comprar_comida = as.integer(x9_nos_ultimos_tres_meses_algum_morador_com_menos_de_18_anos_de_idade_alguma_vez_deixou_de_ter_uma_alimentacao_saudavel_e_variada_porque_nao_havia_dinheiro_para_comprar_comida),
+    x10_nos_ultimos_tres_meses_algum_morador_com_menos_de_18_anos_de_idade_alguma_vez_nao_comeu_quantidade_suficiente_de_comida_porque_nao_havia_dinheiro_para_comprar_comida = as.integer(x10_nos_ultimos_tres_meses_algum_morador_com_menos_de_18_anos_de_idade_alguma_vez_nao_comeu_quantidade_suficiente_de_comida_porque_nao_havia_dinheiro_para_comprar_comida),
+    x11_nos_ultimos_tres_meses_alguma_vez_foi_diminuida_a_quantidade_de_alimentos_das_refeicoes_de_algum_morador_com_menos_de_18_anos_de_idade_porque_nao_havia_dinheiro_para_comprar_comida = as.integer(x11_nos_ultimos_tres_meses_alguma_vez_foi_diminuida_a_quantidade_de_alimentos_das_refeicoes_de_algum_morador_com_menos_de_18_anos_de_idade_porque_nao_havia_dinheiro_para_comprar_comida),
+    x12_nos_ultimos_tres_meses_alguma_vez_algum_morador_com_menos_de_18_anos_de_idade_deixou_de_fazer_alguma_refeicao_porque_nao_havia_dinheiro_para_comprar_comida = as.integer(x12_nos_ultimos_tres_meses_alguma_vez_algum_morador_com_menos_de_18_anos_de_idade_deixou_de_fazer_alguma_refeicao_porque_nao_havia_dinheiro_para_comprar_comida),
+    x13_nos_ultimos_tres_meses_alguma_vez_algum_morador_com_menos_de_18_anos_de_idade_sentiu_fome_mas_nao_comeu_porque_nao_havia_dinheiro_para_comprar_comida = as.integer(x13_nos_ultimos_tres_meses_alguma_vez_algum_morador_com_menos_de_18_anos_de_idade_sentiu_fome_mas_nao_comeu_porque_nao_havia_dinheiro_para_comprar_comida),
+    x14_nos_ultimos_tres_meses_alguma_vez_algum_morador_com_menos_de_18_anos_de_idade_fez_apenas_uma_refeicao_ao_dia_ou_ficou_sem_comer_por_um_dia_inteiro_porque_nao_havia_dinheiro_para_comprar_comida = as.integer(x14_nos_ultimos_tres_meses_alguma_vez_algum_morador_com_menos_de_18_anos_de_idade_fez_apenas_uma_refeicao_ao_dia_ou_ficou_sem_comer_por_um_dia_inteiro_porque_nao_havia_dinheiro_para_comprar_comida)
+  )
+
+
+### VERIFICAR COLUNAS PARA VER SE PODEMOS SEGUIR PARA CALCULO DOS ESCORES
