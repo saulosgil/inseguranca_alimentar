@@ -1305,7 +1305,295 @@ df_ajustado <-
     x12_nos_ultimos_tres_meses_alguma_vez_algum_morador_com_menos_de_18_anos_de_idade_deixou_de_fazer_alguma_refeicao_porque_nao_havia_dinheiro_para_comprar_comida = as.integer(x12_nos_ultimos_tres_meses_alguma_vez_algum_morador_com_menos_de_18_anos_de_idade_deixou_de_fazer_alguma_refeicao_porque_nao_havia_dinheiro_para_comprar_comida),
     x13_nos_ultimos_tres_meses_alguma_vez_algum_morador_com_menos_de_18_anos_de_idade_sentiu_fome_mas_nao_comeu_porque_nao_havia_dinheiro_para_comprar_comida = as.integer(x13_nos_ultimos_tres_meses_alguma_vez_algum_morador_com_menos_de_18_anos_de_idade_sentiu_fome_mas_nao_comeu_porque_nao_havia_dinheiro_para_comprar_comida),
     x14_nos_ultimos_tres_meses_alguma_vez_algum_morador_com_menos_de_18_anos_de_idade_fez_apenas_uma_refeicao_ao_dia_ou_ficou_sem_comer_por_um_dia_inteiro_porque_nao_havia_dinheiro_para_comprar_comida = as.integer(x14_nos_ultimos_tres_meses_alguma_vez_algum_morador_com_menos_de_18_anos_de_idade_fez_apenas_uma_refeicao_ao_dia_ou_ficou_sem_comer_por_um_dia_inteiro_porque_nao_havia_dinheiro_para_comprar_comida)
+  ) |>
+  # ajuste devido o escore de ansiedade estar vindo de 1 a 4 e não 0 a 3 como deveria!
+  mutate(
+        inventario_de_ansiedade_de_beck_demencia_ou_formigamento = inventario_de_ansiedade_de_beck_demencia_ou_formigamento - 1,
+        inventario_de_ansiedade_de_beck_sensacao_de_calor = inventario_de_ansiedade_de_beck_sensacao_de_calor - 1,
+        inventario_de_ansiedade_de_beck_tremores_nas_pernas = inventario_de_ansiedade_de_beck_tremores_nas_pernas - 1,
+        inventario_de_ansiedade_de_beck_incapaz_de_relaxar = inventario_de_ansiedade_de_beck_incapaz_de_relaxar - 1,
+        inventario_de_ansiedade_de_beck_medo_que_aconteca_o_pior = inventario_de_ansiedade_de_beck_medo_que_aconteca_o_pior - 1,
+        inventario_de_ansiedade_de_beck_atordoado_ou_tonto = inventario_de_ansiedade_de_beck_atordoado_ou_tonto - 1,
+        inventario_de_ansiedade_de_beck_palpitacao_ou_aceleracao_do_coracao = inventario_de_ansiedade_de_beck_palpitacao_ou_aceleracao_do_coracao -1,
+        inventario_de_ansiedade_de_beck_sem_equilibrio = inventario_de_ansiedade_de_beck_sem_equilibrio -1,
+        inventario_de_ansiedade_de_beck_aterrorizado = inventario_de_ansiedade_de_beck_aterrorizado -1,
+        inventario_de_ansiedade_de_beck_nervoso = inventario_de_ansiedade_de_beck_nervoso -1,
+        inventario_de_ansiedade_de_beck_sensacao_de_sufocacao = inventario_de_ansiedade_de_beck_sensacao_de_sufocacao -1,
+        inventario_de_ansiedade_de_beck_tremores_nas_maos = inventario_de_ansiedade_de_beck_tremores_nas_maos -1,
+        inventario_de_ansiedade_de_beck_tremulo = inventario_de_ansiedade_de_beck_tremulo -1,
+        inventario_de_ansiedade_de_beck_medo_de_perder_o_controle = inventario_de_ansiedade_de_beck_medo_de_perder_o_controle -1,
+        inventario_de_ansiedade_de_beck_dificuldade_para_respirar = inventario_de_ansiedade_de_beck_dificuldade_para_respirar -1,
+        inventario_de_ansiedade_de_beck_medo_de_morrer = inventario_de_ansiedade_de_beck_medo_de_morrer -1,
+        inventario_de_ansiedade_de_beck_assustado = inventario_de_ansiedade_de_beck_assustado -1,
+        inventario_de_ansiedade_de_beck_indisgestao_ou_desconforto_no_abdome = inventario_de_ansiedade_de_beck_indisgestao_ou_desconforto_no_abdome - 1,
+        inventario_de_ansiedade_de_beck_sensacao_de_desmaio = inventario_de_ansiedade_de_beck_sensacao_de_desmaio - 1,
+        inventario_de_ansiedade_de_beck_rosto_afogueado = inventario_de_ansiedade_de_beck_rosto_afogueado - 1,
+        inventario_de_ansiedade_de_beck_suor_nao_devido_ao_calor = inventario_de_ansiedade_de_beck_suor_nao_devido_ao_calor - 1
   )
 
+# Calculo das variáveis -----------------------------------------------------------------------
+### idade
+### IMC
+### ICQ
+### ebia score e ebia categorico
+### ansiedade score e ebia categorico
+### depressao score e ebia categorico
 
-### VERIFICAR COLUNAS PARA VER SE PODEMOS SEGUIR PARA CALCULO DOS ESCORES
+df_ajustado <-
+  df_ajustado |>
+  # calcular idade
+  mutate(
+    idade = 2025 - year(data_nasc),
+  # calcular IMC
+    imc = peso/((round(estatura)/100)^2),
+  # encontrar maior valor obtido da circunferencia da cintura
+    circ_cintura = apply(df_ajustado[, 23:25], MARGIN = 1,FUN = max),
+  # encontrar maior valor obtido da circunferencia da quadril
+    circ_quadril = apply(df_ajustado[, 26:28], MARGIN = 1,FUN = max),
+  # calculo do Indice cintura quadril - ICQ
+    icq = round(circ_cintura/circ_quadril,digits = 2),
+  # insegurança alimentar - soma dos scores (1 ou 0 para cada uma das 14 perguntas)
+    ebia =  apply(df_ajustado[, 7:20], MARGIN = 1,FUN = sum),
+  # insegurança alimentar - Categorico
+    ebia_class = case_when(
+      ebia == 0 ~ "SA",
+      ebia > 0 & ebia <= 3 ~ "IL",
+      ebia >= 4 & ebia <= 5 ~ "IM",
+      ebia >= 6 & ebia <= 8 ~ "IG"
+    ),
+  # score de ansiedade
+    ansiedade =  apply(df_ajustado[, 29:49], MARGIN = 1,FUN = sum),
+  # ansiedade - categorica
+  ansiedade_cat = case_when(
+    ansiedade <  08 ~ "Minimal",
+    ansiedade >= 08 & ansiedade < 16 ~ "Mild",
+    ansiedade >= 16 & ansiedade < 26 ~ "Moderate",
+    ansiedade >= 26 ~ "Severe"
+  ),
+  # score de depressao
+    depressao =  apply(df_ajustado[, 50:70], MARGIN = 1,FUN = sum),
+  # depressao categorica
+    depressao_cat = case_when(
+      depressao <  14 ~ "Minimal",
+      depressao >= 14 & depressao < 20 ~ "Mild",
+      depressao >= 20 & depressao < 29 ~ "Moderate",
+      depressao >= 29 ~ "Severe"
+    )
+  ) |>
+  # remove colunas que nao serao usadas
+  select(-data_nasc,
+         -circ_cintura_1,
+         -circ_cintura_2,
+         -circ_cintura_3,
+         -circ_quadril_1,
+         -circ_quadril_2,
+         -circ_quadril_3,
+         -starts_with(match = "x"),
+         -starts_with(match = "inventario_de_ansiedade"),
+         -starts_with(match = "inventario_de_depressao")
+         )
+
+# calculo dos WHOQoL --------------------------------------------------------------------------
+df_ajustado <-
+  df_ajustado |>
+  # renomeando para facilitar o calculo dos scores da qualidade de vida
+  mutate(
+    who_qol1 = the_world_health_organization_quality_of_life_whoqol_bref_como_voce_avaliaria_sua_qualidade_de_vida,
+    who_qol2 = the_world_health_organization_quality_of_life_whoqol_bref_quao_satisfeito_a_voce_esta_com_a_sua_saude,
+    who_qol3 = the_world_health_organization_quality_of_life_whoqol_bref_em_que_medida_voce_acha_que_sua_dor_fisica_impede_voce_de_fazer_o_que_voce_precisa,
+    who_qol4 = the_world_health_organization_quality_of_life_whoqol_bref_o_quanto_voce_precisa_de_algum_tratamento_medico_para_levar_sua_vida_diaria,
+    who_qol5 = the_world_health_organization_quality_of_life_whoqol_bref_o_quanto_voce_aproveita_a_vida,
+    who_qol6 = the_world_health_organization_quality_of_life_whoqol_bref_em_que_medida_voce_acha_que_a_sua_vida_tem_sentido,
+    who_qol7 = the_world_health_organization_quality_of_life_whoqol_bref_o_quanto_voce_consegue_se_concentrar,
+    who_qol8 = the_world_health_organization_quality_of_life_whoqol_bref_quao_seguro_a_voce_se_sente_em_sua_vida_diaria,
+    who_qol9 = the_world_health_organization_quality_of_life_whoqol_bref_quao_saudavel_e_o_seu_ambiente_fisico_clima_barulho_poluicao_atrativos,
+    who_qol10 = the_world_health_organization_quality_of_life_whoqol_bref_voce_tem_energia_suficiente_para_seu_dia_a_dia,
+    who_qol11 = the_world_health_organization_quality_of_life_whoqol_bref_voce_e_capaz_de_aceitar_sua_aparencia_fisica,
+    who_qol12 = the_world_health_organization_quality_of_life_whoqol_bref_voce_tem_dinheiro_suficiente_para_satisfazer_suas_necessidades,
+    who_qol13 = the_world_health_organization_quality_of_life_whoqol_bref_quao_disponiveis_para_voce_estao_as_informacoes_que_precisa_no_seu_dia_a_dia,
+    who_qol14 = the_world_health_organization_quality_of_life_whoqol_bref_em_que_medida_voce_tem_oportunidades_de_atividade_de_lazer,
+    who_qol15 = the_world_health_organization_quality_of_life_whoqol_bref_quao_bem_voce_e_capaz_de_se_locomover,
+    who_qol16 = the_world_health_organization_quality_of_life_whoqol_bref_quao_satisfeito_a_voce_esta_com_o_seu_sono,
+    who_qol17 = the_world_health_organization_quality_of_life_whoqol_bref_quao_satisfeito_a_voce_esta_com_sua_capacidade_de_desempenhar_as_atividades_do_seu_dia_a_dia,
+    who_qol18 = the_world_health_organization_quality_of_life_whoqol_bref_quao_satisfeito_a_voce_esta_com_sua_capacidade_para_o_trabalho,
+    who_qol19 = the_world_health_organization_quality_of_life_whoqol_bref_quao_satisfeito_a_voce_esta_consigo_mesmo,
+    who_qol20 = the_world_health_organization_quality_of_life_whoqol_bref_quao_satisfeito_a_voce_esta_com_suas_relacoes_pessoais_amigos_parentes_conhecidos_colegas,
+    who_qol21 = the_world_health_organization_quality_of_life_whoqol_bref_quao_satisfeito_a_voce_esta_com_sua_vida_sexual,
+    who_qol22 = the_world_health_organization_quality_of_life_whoqol_bref_quao_satisfeito_a_voce_esta_com_o_apoio_que_voce_recebe_de_seus_amigos,
+    who_qol23 = the_world_health_organization_quality_of_life_whoqol_bref_quao_satisfeito_a_voce_esta_com_as_condicoes_do_local_onde_mora,
+    who_qol24 = the_world_health_organization_quality_of_life_whoqol_bref_quao_satisfeito_a_voce_esta_com_o_seu_acesso_aos_servicos_de_saude,
+    who_qol25 = the_world_health_organization_quality_of_life_whoqol_bref_quao_satisfeito_a_voce_esta_com_o_seu_meio_de_transporte,
+    who_qol26 = the_world_health_organization_quality_of_life_whoqol_bref_com_que_frequencia_voce_tem_sentimentos_negativos_tais_como_mau_humor_desespero_ansiedade_depressao
+  ) |>
+  select(-starts_with(match = "the_world_health"))|>
+  # ajustando as questões do WHOQoL
+  mutate(who_qol3 = case_when(who_qol3 == 1 ~ 5,
+                              who_qol3 == 2 ~ 4,
+                              who_qol3 == 3 ~ 3,
+                              who_qol3 == 4 ~ 2,
+                              who_qol3 == 5 ~ 1),
+         who_qol4 = case_when(who_qol4 == 1 ~ 5,
+                              who_qol4 == 2 ~ 4,
+                              who_qol4 == 3 ~ 3,
+                              who_qol4 == 4 ~ 2,
+                              who_qol4 == 5 ~ 1),
+         who_qol26 = case_when(who_qol26 == 1 ~ 5,
+                               who_qol26 == 2 ~ 4,
+                               who_qol26 == 3 ~ 3,
+                               who_qol26 == 4 ~ 2,
+                               who_qol26 == 5 ~ 1))
+### Calculando os dominios
+# físico
+whoqol_fisico <-
+  df_ajustado |>
+  select(who_qol3,
+         who_qol4,
+         who_qol10,
+         who_qol15,
+         who_qol6,
+         who_qol17,
+         who_qol18)
+
+whoqol_fisico <-
+  whoqol_fisico |>
+  mutate(whoqol_fisico = apply(whoqol_fisico[,1:6],MARGIN = 1,FUN = sum)/7) |>
+  select(whoqol_fisico)
+
+# psicologico
+whoqol_psicol <-
+  df_ajustado |>
+  select(who_qol5,
+         who_qol6,
+         who_qol7,
+         who_qol11,
+         who_qol19,
+         who_qol26)
+
+whoqol_psicol <-
+  whoqol_psicol |>
+  mutate(whoqol_psicol = apply(whoqol_psicol[,1:5],MARGIN = 1,FUN = sum)/6) |>
+  select(whoqol_psicol)
+
+# Relações sociais
+whoqol_social <-
+  df_ajustado |>
+  select(who_qol20,
+         who_qol21,
+         who_qol22)
+
+whoqol_social <-
+  whoqol_social |>
+  mutate(whoqol_social = apply(whoqol_social[,1:3],MARGIN = 1,FUN = sum)/3) |>
+  select(whoqol_social)
+
+# Meio ambiente
+whoqol_ambiente <-
+  df_ajustado |>
+  select(who_qol8,
+         who_qol9,
+         who_qol12,
+         who_qol13,
+         who_qol14,
+         who_qol23,
+         who_qol24,
+         who_qol25)
+
+whoqol_ambiente <-
+  whoqol_ambiente |>
+  mutate(whoqol_ambiente = apply(whoqol_ambiente[,1:3],MARGIN = 1,FUN = sum)/8) |>
+  select(whoqol_ambiente)
+
+# Juntando os dominios do WHOQol com a base ---------------------------------------------------
+#juntado os dominios
+fis_psi <- bind_cols(whoqol_fisico, whoqol_psicol)
+fis_psi_soc <- bind_cols(fis_psi,whoqol_social)
+todos_dominios <- bind_cols(fis_psi_soc,whoqol_ambiente)
+
+# Juntando os dominios do WHOQoL com a base e removendo as colunas isoladas
+df_ajustado_final <-
+  bind_cols(df_ajustado, todos_dominios) |>
+  select(-starts_with(match = "who"))
+
+# Tratando os missing -------------------------------------------------------------------------
+# Verifricando os missing
+mice::md.pattern(df_ajustado_final)
+
+# Imputação using pmm
+tempData <- mice::mice(df_ajustado_final,m=5,maxit=52,method='pmm',seed=500)
+
+# Base imputada
+df <- complete(tempData,1)
+mice::md.pattern(df)
+glimpse(df)
+
+# tratando os missings
+df <-
+  df |>
+  mutate(
+    # ansiedade - categorica
+    ansiedade_cat = case_when(
+      ansiedade <  08 ~ "Minimal",
+      ansiedade >= 08 & ansiedade < 16 ~ "Mild",
+      ansiedade >= 16 & ansiedade < 26 ~ "Moderate",
+      ansiedade >= 26 ~ "Severe"
+    ),
+    # depressao categorica
+    depressao_cat = case_when(
+      depressao <  14 ~ "Minimal",
+      depressao >= 14 & depressao < 20 ~ "Mild",
+      depressao >= 20 & depressao < 29 ~ "Moderate",
+      depressao >= 29 ~ "Severe"
+    ),
+    # insegurança alimentar - Categorico
+    ebia_class = case_when(
+      ebia == 0 ~ "SA",
+      ebia > 0 & ebia <= 3 ~ "IL",
+      ebia >= 4 & ebia <= 5 ~ "IM",
+      ebia >= 6 & ebia <= 8 ~ "IG",
+      ebia >= 9 ~ "IG"
+    ),
+    # substituindo pelo valor mais frequente
+    estado_civil = case_when(
+      is.na(estado_civil) ~ "casado",
+      .default = as.character(estado_civil)
+    ),
+    # substituindo pelo valor mais frequente
+    raca = case_when(
+      is.na(raca) ~ "branco",
+      .default = as.character(raca)
+    ),
+    # substituindo pelo valor mais frequente
+    genero = case_when(
+      is.na(genero) ~ "feminino",
+      .default = as.character(genero)
+    ),
+    # substituindo pelo valor mais frequente
+    ebia = case_when(
+      is.na(ebia) ~ "branco",
+      .default = as.character(ebia)
+    ),
+    # substituindo pelo valor mais frequente
+    renda_familiar = case_when(
+      is.na(renda_familiar_considere_a_renda_de_todas_as_pessoas_que_moral_na_sua_casa) ~ "ate 1 salario minimo",
+      .default = as.character(renda_familiar_considere_a_renda_de_todas_as_pessoas_que_moral_na_sua_casa)))
+
+mice::md.pattern(df)
+
+# Arrumando a coluna IMC ----------------------------------------------------------------------
+df <-
+  df |>
+  filter(idade >= 18) |>
+  mutate(
+    peso = case_when(peso == 0 ~ mean(peso), .default = as.double(peso)),
+    estatura = case_when(estatura < 50 ~ mean(estatura), .default = as.double(estatura)),
+    imc = peso / ((round(estatura) / 100) ^ 2)
+  ) |>
+  # renda_familiar_considere_a_renda_de_todas_as_pessoas_que_moral_na_sua_casa
+  select(-renda_familiar_considere_a_renda_de_todas_as_pessoas_que_moral_na_sua_casa)
+
+# visualizando a base final -------------------------------------------------------------------
+glimpse(df)
+
+# tabela para analise -------------------------------------------------------------------------
+write_rds(x = df,file =  "df_para_analise.rds") # tirar o comentário para salvar
+
