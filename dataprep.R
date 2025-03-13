@@ -1512,7 +1512,7 @@ todos_dominios <- bind_cols(fis_psi_soc,whoqol_ambiente)
 # Juntando os dominios do WHOQoL com a base e removendo as colunas isoladas
 df_ajustado_final <-
   bind_cols(df_ajustado, todos_dominios) |>
-  select(-starts_with(match = "who"))
+  select(-starts_with(match = "who_"))
 
 # Tratando os missing -------------------------------------------------------------------------
 # Verifricando os missing
@@ -1577,6 +1577,7 @@ df <-
       is.na(renda_familiar_considere_a_renda_de_todas_as_pessoas_que_moral_na_sua_casa) ~ "ate 1 salario minimo",
       .default = as.character(renda_familiar_considere_a_renda_de_todas_as_pessoas_que_moral_na_sua_casa)))
 
+# verificando os missings
 mice::md.pattern(df)
 
 # Arrumando a coluna IMC ----------------------------------------------------------------------
@@ -1591,9 +1592,11 @@ df <-
   # renda_familiar_considere_a_renda_de_todas_as_pessoas_que_moral_na_sua_casa
   select(-renda_familiar_considere_a_renda_de_todas_as_pessoas_que_moral_na_sua_casa)
 
+# verificando os missings
+mice::md.pattern(df)
+
 # visualizando a base final -------------------------------------------------------------------
 glimpse(df)
 
 # tabela para analise -------------------------------------------------------------------------
 write_rds(x = df,file =  "df_para_analise.rds") # tirar o comentário para salvar
-
