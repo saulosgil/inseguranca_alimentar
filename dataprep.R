@@ -1456,8 +1456,12 @@ whoqol_fisico <-
 
 whoqol_fisico <-
   whoqol_fisico |>
-  mutate(whoqol_fisico = apply(whoqol_fisico[,1:6],MARGIN = 1,FUN = sum)/7) |>
+  mutate(whoqol_fisico = apply(whoqol_fisico[,1:6],MARGIN = 1,FUN = mean)*4) |>
   select(whoqol_fisico)
+
+# verificando os valores - range 0-20
+min(whoqol_fisico, na.rm = TRUE)
+max(whoqol_fisico, na.rm = TRUE)
 
 # psicologico
 whoqol_psicol <-
@@ -1469,10 +1473,15 @@ whoqol_psicol <-
          who_qol19,
          who_qol26)
 
+
 whoqol_psicol <-
   whoqol_psicol |>
-  mutate(whoqol_psicol = apply(whoqol_psicol[,1:5],MARGIN = 1,FUN = sum)/6) |>
+  mutate(whoqol_psicol = apply(whoqol_psicol[,1:6],MARGIN = 1,FUN = mean)*4) |>
   select(whoqol_psicol)
+
+# verificando os valores - range 0-20
+min(whoqol_psicol, na.rm = TRUE)
+max(whoqol_psicol, na.rm = TRUE)
 
 # Relações sociais
 whoqol_social <-
@@ -1483,8 +1492,12 @@ whoqol_social <-
 
 whoqol_social <-
   whoqol_social |>
-  mutate(whoqol_social = apply(whoqol_social[,1:3],MARGIN = 1,FUN = sum)/3) |>
+  mutate(whoqol_social = apply(whoqol_social[,1:3],MARGIN = 1,FUN = mean)*4) |>
   select(whoqol_social)
+
+# verificando os valores - range 0-20
+min(whoqol_social, na.rm = TRUE)
+max(whoqol_social, na.rm = TRUE)
 
 # Meio ambiente
 whoqol_ambiente <-
@@ -1500,14 +1513,28 @@ whoqol_ambiente <-
 
 whoqol_ambiente <-
   whoqol_ambiente |>
-  mutate(whoqol_ambiente = apply(whoqol_ambiente[,1:3],MARGIN = 1,FUN = sum)/8) |>
+  mutate(whoqol_ambiente = apply(whoqol_ambiente[,1:3],MARGIN = 1,FUN = mean)*4) |>
   select(whoqol_ambiente)
+
+# verificando os valores - range 0-20
+min(whoqol_ambiente, na.rm = TRUE)
+max(whoqol_ambiente, na.rm = TRUE)
 
 # Juntando os dominios do WHOQol com a base ---------------------------------------------------
 #juntado os dominios
 fis_psi <- bind_cols(whoqol_fisico, whoqol_psicol)
 fis_psi_soc <- bind_cols(fis_psi,whoqol_social)
 todos_dominios <- bind_cols(fis_psi_soc,whoqol_ambiente)
+
+# transformar scores em escala de 0-100
+todos_dominios <-
+  todos_dominios |>
+  mutate(
+    whoqol_fisico_escore_100 = (whoqol_fisico - 4)*(100/16),
+    whoqol_psicol_escore_100 = (whoqol_psicol - 4)*(100/16),
+    whoqol_social_escore_100 = (whoqol_social - 4)*(100/16),
+    whoqol_ambiente_escore_100 = (whoqol_ambiente - 4)*(100/16),
+  )
 
 # Juntando os dominios do WHOQoL com a base e removendo as colunas isoladas
 df_ajustado_final <-
@@ -1516,14 +1543,14 @@ df_ajustado_final <-
 
 # Tratando os missing -------------------------------------------------------------------------
 # Verifricando os missing
-mice::md.pattern(df_ajustado_final)
+DataExplorer::plot_missing(df_ajustado_final)
 
 # Imputação using pmm
 tempData <- mice::mice(df_ajustado_final,m=5,maxit=52,method='pmm',seed=500)
 
 # Base imputada
 df <- complete(tempData,1)
-mice::md.pattern(df)
+DataExplorer::plot_missing(df)
 glimpse(df)
 
 # tratando os missings
@@ -1578,7 +1605,7 @@ df <-
       .default = as.character(renda_familiar_considere_a_renda_de_todas_as_pessoas_que_moral_na_sua_casa)))
 
 # verificando os missings
-mice::md.pattern(df)
+DataExplorer::plot_missing(df)
 
 # Arrumando a coluna IMC ----------------------------------------------------------------------
 df <-
@@ -1589,14 +1616,26 @@ df <-
     estatura = case_when(estatura < 50 ~ mean(estatura), .default = as.double(estatura)),
     imc = peso / ((round(estatura) / 100) ^ 2)
   ) |>
+  mutate(
+    whoqol_fisico_escore_100 = case_when(is.na(whoqol_fisico_escore_100) ~ mean(whoqol_fisico_escore_100, na.rm = TRUE), .default = as.numeric(whoqol_fisico_escore_100)),
+    whoqol_psicol_escore_100 = case_when(is.na(whoqol_psicol_escore_100) ~ mean(whoqol_psicol_escore_100, na.rm = TRUE), .default = as.numeric(whoqol_psicol_escore_100)),
+    whoqol_social_escore_100 = case_when(is.na(whoqol_social_escore_100) ~ mean(whoqol_social_escore_100, na.rm = TRUE), .default = as.numeric(whoqol_social_escore_100)),
+    whoqol_ambiente_escore_100 = case_when(is.na(whoqol_ambiente_escore_100) ~ mean(whoqol_ambiente_escore_100, na.rm = TRUE), .default = as.numeric(whoqol_ambiente_escore_100))
+  ) |>
   # renda_familiar_considere_a_renda_de_todas_as_pessoas_que_moral_na_sua_casa
-  select(-renda_familiar_considere_a_renda_de_todas_as_pessoas_que_moral_na_sua_casa)
+  select(
+    -renda_familiar_considere_a_renda_de_todas_as_pessoas_que_moral_na_sua_casa,
+    -whoqol_fisico,
+    -whoqol_psicol,
+    -whoqol_social,
+    -whoqol_ambiente)
 
 # verificando os missings
-mice::md.pattern(df)
+DataExplorer::plot_missing(df)
 
 # visualizando a base final -------------------------------------------------------------------
 glimpse(df)
 
 # tabela para analise -------------------------------------------------------------------------
 write_rds(x = df,file =  "df_para_analise.rds") # tirar o comentário para salvar
+# write_csv2(x = df,file =  "dfParaAnaliseCris.csv") # tirar o comentário para salvar
