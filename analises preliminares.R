@@ -269,6 +269,19 @@ teste |>
   add_barstack_relative() +
   scale_x_discrete(limits = c("SA", "IL", "IM", "IG"))
 
+# Count relativo por nivel de ansiedade -------------------------------------------------------
+### 2 niveis
+teste |>
+  tidyplot(x = ebia_class_2, color = ansiedade_cat) |>
+  add_barstack_relative() +
+  scale_x_discrete(limits = c("SA", "IA"))
+
+### 4 niveis
+teste |>
+  tidyplot(x = ebia_class, color = ansiedade_cat) |>
+  add_barstack_relative() +
+  scale_x_discrete(limits = c("SA", "IL", "IM", "IG"))
+
 # regressoes ----------------------------------------------------------------------------------
 teste <-
   df |>
