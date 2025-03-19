@@ -25,6 +25,10 @@ df <-
     idade_class = case_when(
       idade < 60 ~ "adults",
       idade <= 60 ~ "older"
+    ),
+    imc_class = case_when(
+      imc < 30 ~ "non obese",
+      imc >= 30 ~ "obese"
     )
   )
 
@@ -91,7 +95,7 @@ df_reg <-
   )
 
 # modelos
-model <- glm(depressao ~ ebia_class_3 + genero + raca + estado_civil + idade_class + renda_familiar,
+model <- glm(depressao ~ ebia_class_3 + genero + raca + estado_civil + idade_class + renda_familiar + has + dm + imc_class,
              data = df_reg)
 sjPlot::tab_model(model)
-
+df$
