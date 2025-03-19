@@ -21,6 +21,10 @@ df <-
     ebia_class_2 = case_when(
       ebia_class != "SA" ~ "IA",
       .default = ebia_class
+    ),
+    idade_class = case_when(
+      idade < 60 ~ "adults",
+      idade <= 60 ~ "older"
     )
   )
 
@@ -87,7 +91,7 @@ df_reg <-
   )
 
 # modelos
-model <- glm(depressao ~ ebia_class_3 + genero + raca + estado_civil + idade + renda_familiar,
+model <- glm(depressao ~ ebia_class_3 + genero + raca + estado_civil + idade_class + renda_familiar,
              data = df_reg)
 sjPlot::tab_model(model)
 
