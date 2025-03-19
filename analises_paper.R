@@ -25,8 +25,7 @@ df <-
   )
 
 # Grafico
-g1 <-
-  df |>
+df |>
   tidyplot(x = ebia_class_2, y = depressao, color = ebia_class_2) |>
   add_mean_bar(alpha = 0.4) |>
   add_sem_errorbar() |>
@@ -59,15 +58,14 @@ DunnettTest(x=df$depressao,
 
 # Count relativo por nivel de ansiedade -------------------------------------------------------
 ### 2 niveis
-g2 <-
-  df_reg |>
+df |>
   tidyplot(x = ebia_class_2, color = depressao_cat) |>
   add_barstack_relative() +
   scale_x_discrete(limits = c("SA", "IA"))
 
 
 ### 4 niveis
-df_reg |>
+df |>
   tidyplot(x = ebia_class, color = depressao_cat) |>
   add_barstack_relative() +
   scale_x_discrete(limits = c("SA", "IL", "IM", "IG"))
