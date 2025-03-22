@@ -211,11 +211,11 @@ DunnettTest(x=df$depressao,
             g=df$ebia_class,control = "FS") ### NÃO TEM DIFERENÇA ####
 
 # Regressoes ----------------------------------------------------------------------------------
-# Ajustando as labels para colocar o SA como referencia
+# Ajustando as labels para colocar o FS como referencia
 df_reg <-
   df |>
   mutate(ebia_class_2 = case_when(ebia_class != "FS" ~ "FI", .default = ebia_class)) |>
-  mutate(ebia_class_3 = case_when(ebia_class_2 == "FS" ~ "0_FS", ebia_class_2 == "FI" ~ "1_IA")) |>
+  mutate(ebia_class_3 = case_when(ebia_class_2 == "FS" ~ "0_FS", ebia_class_2 == "FI" ~ "1_FI")) |>
   mutate(
     depressao_cat_severe = case_when(
       depressao_cat == "Mild" ~ "Mild:Minimal",
