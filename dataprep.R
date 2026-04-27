@@ -4,7 +4,7 @@ library(lubridate)
 library(stringr)
 
 # Download dataset ----------------------------------------------------------------------------
-df <- read_rds("df.rds")
+df <- read_rds("data/df.rds")
 
 # Cleaning dataset ----------------------------------------------------------------------------
 ## Selecionar caracteristicas
@@ -59,10 +59,14 @@ whoqol <-
     starts_with('the_world')
 )
 
+## Selecionar preditor - ABEP
+abep <- df[, 4:18]
+
 ## Juntar todas as variáveis
 df <-
   bind_cols(
   caracteristicas,
+  abep,
   inseguranca_alimentar,
   fator_risco_cv,
   sintomas_ansiedade,
