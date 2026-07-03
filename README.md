@@ -1,100 +1,101 @@
-# 🍽️🧠 inseguranca_alimentar
+# 🍽️🧠 food_insecurity
 
-Repositório com scripts, bases analíticas e materiais de apoio relacionados ao estudo sobre a associação entre **insegurança alimentar**, **sintomas de depressão**, **ansiedade** e **fatores de risco cardiometabólico**.
+Repository with scripts, analytical datasets, and supporting materials related to the study on the association between **food insecurity**, **symptoms of depression**, **anxiety**, and **cardiometabolic risk factors**.
 
-## 📖 Sobre o projeto
+## 📖 About the project
 
-Este repositório organiza o fluxo analítico de um estudo transversal conduzido no Brasil com o objetivo de investigar o impacto da **insegurança alimentar** sobre:
+This repository organizes the analytical workflow of a cross-sectional study conducted in Brazil aimed at investigating the impact of **food insecurity** on:
 
-- sintomas de depressão;
-- sintomas de ansiedade;
-- índice de massa corporal (IMC);
-- razão cintura-quadril.
+- depressive symptoms;
+- anxiety symptoms;
+- body mass index (BMI);
+- waist-to-hip ratio.
 
-O estudo foi realizado com participantes com mais de 17 anos, recrutados entre março de 2024 e março de 2025, na Universidade Santo Amaro (UNISA), em São Paulo, Brasil.
+The study was conducted with participants over 17 years old, recruited between March 2024 and March 2025, at Universidade Santo Amaro (UNISA), in São Paulo, Brazil.
 
-## ✅ Artigo publicado
+## ✅ Published article
 
-O artigo deste projeto foi **publicado** e pode ser lido na íntegra aqui:
+The article from this project has been **published** and can be read in full here:
 
 🔗 **Full text:** https://link.springer.com/article/10.1007/s11126-026-10274-7
 
-### Referência do artigo
+### Article reference
 
-**Gonçalves CM, Fernandes CYP, Neves LM, Colombo-Souza P, Amadeu MA, Reimberg T, Gomes THS, et al., Gil S.**  
-**Impact of Food Insecurity on Symptoms of Depression, Anxiety, and Cardiometabolic Risk Factors: A Cross-sectional Study.**  
+**Gonçalves CM, Fernandes CYP, Neves LM, Colombo-Souza P, Amadeu MA, Reimberg T, Gomes THS, et al., Gil S.**
+**Impact of Food Insecurity on Symptoms of Depression, Anxiety, and Cardiometabolic Risk Factors: A Cross-sectional Study.**
 *Psychiatric Quarterly.* Published online March 20, 2026.
 
-## 🎯 Objetivo do estudo
+## 🎯 Study objective
 
-Examinar os efeitos da insegurança alimentar sobre:
+To examine the effects of food insecurity on:
 
-1. sintomas de depressão;
-2. sintomas de ansiedade;
-3. fatores de risco cardiometabólico.
+1. depressive symptoms;
+2. anxiety symptoms;
+3. cardiometabolic risk factors.
 
-Além disso, o estudo também investigou a influência de diferentes níveis de insegurança alimentar:
+In addition, the study also investigated the influence of different levels of food insecurity:
 
-- insegurança alimentar leve;
-- insegurança alimentar moderada;
-- insegurança alimentar grave.
+- mild food insecurity;
+- moderate food insecurity;
+- severe food insecurity.
 
-## 🧪 Desenho do estudo
+## 🧪 Study design
 
-Trata-se de um **estudo transversal** com entrevistas semiestruturadas e avaliações antropométricas.
+This is a **cross-sectional study** with semi-structured interviews and anthropometric assessments.
 
-### Principais medidas avaliadas
+### Main measures assessed
 
-- **Insegurança alimentar**: avaliada pela **Escala Brasileira de Insegurança Alimentar (EBIA)**;
-- **Depressão**: avaliada pelo **Beck Depression Inventory (BDI)**;
-- **Ansiedade**: avaliada pelo **Beck Anxiety Inventory (BAI)**;
-- **Risco cardiometabólico**: avaliado por **IMC** e **razão cintura-quadril**.
+- **Food insecurity**: assessed using the **Brazilian Household Food Insecurity Measurement Scale (EBIA)**;
+- **Depression**: assessed using the **Beck Depression Inventory (BDI)**;
+- **Anxiety**: assessed using the **Beck Anxiety Inventory (BAI)**;
+- **Cardiometabolic risk**: assessed using **BMI** and **waist-to-hip ratio**.
 
-## 📊 Principais achados
+## 📊 Main findings
 
-Os resultados mostraram que indivíduos classificados com **insegurança alimentar** apresentaram:
+The results showed that individuals classified as experiencing **food insecurity** had:
 
-- maiores escores de sintomas depressivos em comparação com indivíduos com segurança alimentar;
-- associação significativa entre insegurança alimentar e sintomas de depressão no modelo ajustado.
+- higher depressive symptom scores compared to food-secure individuals;
+- a significant association between food insecurity and depressive symptoms in the adjusted model.
 
-Por outro lado:
+On the other hand:
 
-- não foram observadas diferenças estatisticamente significativas para sintomas de ansiedade;
-- não foram observadas associações significativas com IMC e razão cintura-quadril;
-- os diferentes níveis de insegurança alimentar não mostraram efeitos significativos distintos sobre os desfechos mentais e antropométricos.
+- no statistically significant differences were observed for anxiety symptoms;
+- no significant associations were observed with BMI and waist-to-hip ratio;
+- the different levels of food insecurity did not show distinct significant effects on mental health and anthropometric outcomes.
 
-## 🧾 Resumo dos resultados principais
+## 🧾 Summary of key results
 
-- **315 participantes** foram avaliados;
-- **58%** foram classificados em situação de insegurança alimentar;
-- participantes com insegurança alimentar apresentaram maiores escores no BDI;
-- no modelo ajustado, a insegurança alimentar esteve associada a mais sintomas depressivos  
-  (**β = 1.85; IC95% 0.15 a 3.56; P = 0.0330**).
+- **315 participants** were evaluated;
+- **58%** were classified as experiencing food insecurity;
+- participants with food insecurity had higher BDI scores;
+- in the adjusted model, food insecurity was associated with more depressive symptoms
+  (**β = 1.85; 95% CI 0.15 to 3.56; P = 0.0330**).
 
-## 🗂️ Objetivo deste repositório
+## 🗂️ Purpose of this repository
 
-Este repositório foi criado para:
+This repository was created to:
 
-- organizar os scripts de análise;
-- documentar o fluxo analítico do estudo;
-- facilitar a reprodutibilidade das análises;
-- centralizar materiais vinculados ao manuscrito publicado.
+- organize the analysis scripts;
+- document the study's analytical workflow;
+- facilitate reproducibility of the analyses;
+- centralize materials linked to the published manuscript.
 
-## 🔁 Reprodutibilidade
+## 🔁 Reproducibility
 
-Este projeto foi analisado no ambiente **R**, conforme descrito no artigo. O repositório pode incluir:
+This project was analyzed in the **R** environment, as described in the article. The repository may include:
 
-- scripts de preparação de dados;
-- análises estatísticas;
-- tabelas e figuras;
-- arquivos intermediários de base analítica.
+- data preparation scripts;
+- statistical analyses;
+- tables and figures;
+- intermediate analytical dataset files.
 
 ---
 
-## 👨‍💻 Autor
+## 👨‍💻 Author
 
-**Saulo Gil**  
+**Saulo Gil**
 GitHub: [@saulosgil](https://github.com/saulosgil)
 
 ---
 
+Quer que eu salve isso como arquivo `.md` para download, ou só o texto aqui já resolve para você colar direto no repositório?
